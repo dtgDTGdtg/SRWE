@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<WindowStyles>
+  <WS>
+    <Item Value="0x00010000" Name="WS_TABSTOP/WS_MAXIMIZEBOX" />
+    <Item Value="0x00020000" Name="WS_GROUP/WS_MINIMIZEBOX" />
+    <Item Value="0x00040000" Name="WS_THICKFRAME" />
+    <Item Value="0x00080000" Name="WS_SYSMENU" />
+    <Item Value="0x00100000" Name="WS_HSCROLL" />
+    <Item Value="0x00200000" Name="WS_VSCROLL" />
+    <Item Value="0x00400000" Name="WS_DLGFRAME" />
+    <Item Value="0x00800000" Name="WS_BORDER" />
+    <Item Value="0x01000000" Name="WS_MAXIMIZE" />
+    <Item Value="0x02000000" Name="WS_CLIPCHILDREN" />
+    <Item Value="0x04000000" Name="WS_CLIPSIBLINGS" />
+    <Item Value="0x08000000" Name="WS_DISABLED" />
+    <Item Value="0x10000000" Name="WS_VISIBLE" />
+    <Item Value="0x20000000" Name="WS_MINIMIZE" />
+    <Item Value="0x40000000" Name="WS_CHILD" />
+    <Item Value="0x80000000" Name="WS_POPUP" />
+  </WS>
+  <WS_EX>
+    <Item Value="0x00000001" Name="WS_EX_DLGMODALFRAME" />
+    <Item Value="0x00000004" Name="WS_EX_NOPARENTNOTIFY" />
+    <Item Value="0x00000008" Name="WS_EX_TOPMOST" />
+    <Item Value="0x00000010" Name="WS_EX_ACCEPTFILES" />
+    <Item Value="0x00000020" Name="WS_EX_TRANSPARENT" />
+    <Item Value="0x00000040" Name="WS_EX_MDICHILD" />
+    <Item Value="0x00000080" Name="WS_EX_TOOLWINDOW" />
+    <Item Value="0x00000100" Name="WS_EX_WINDOWEDGE" />
+    <Item Value="0x00000200" Name="WS_EX_CLIENTEDGE" />
+    <Item Value="0x00000400" Name="WS_EX_CONTEXTHELP" />
+    <Item Value="0x00001000" Name="WS_EX_RIGHT" />
+    <Item Value="0x00002000" Name="WS_EX_RTLREADING" />
+    <Item Value="0x00004000" Name="WS_EX_LEFTSCROLLBAR" />
+    <Item Value="0x00010000" Name="WS_EX_CONTROLPARENT" />
+    <Item Value="0x00020000" Name="WS_EX_STATICEDGE" />
+    <Item Value="0x00040000" Name="WS_EX_APPWINDOW" />
+    <Item Value="0x00080000" Name="WS_EX_LAYERED" />
+    <Item Value="0x00100000" Name="WS_EX_NOINHERITLAYOUT" />
+    <Item Value="0x00400000" Name="WS_EX_LAYOUTRTL" />
+    <Item Value="0x02000000" Name="WS_EX_COMPOSITED" />
+    <Item Value="0x08000000" Name="WS_EX_NOACTIVATE" />
+  </WS_EX>
+</WindowStyles>
