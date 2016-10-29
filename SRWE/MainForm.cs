@@ -64,6 +64,34 @@ namespace SRWE
 			ReflectSettingsInUI();
 			UpdateCaption();
 			RefreshRecentProfilesMenu();
+			AutoAttachToLastProcess();
+		}
+
+		private void AutoAttachToLastProcess()
+		{
+			if(!SRWE_Settings.AutoAttachToLastKnownProcess)
+			{
+				return;
+			}
+			var moduleNameToProcess = new Dictionary<string, Process>();
+			foreach(var process in Process.GetProcesses())
+			{
+				if(moduleNameToProcess.ContainsKey(process.ProcessName))
+				{
+					continue;
+				}
+				moduleNameToProcess[process.ProcessName] = process;
+			}
+			foreach(var lastAttachedProcess in SRWE_Settings.RecentProcesses)
+			{
+				Process activeProcess = null;
+				if(moduleNameToProcess.TryGetValue(lastAttachedProcess, out activeProcess))
+				{
+					// process is active. Attach to it!
+					AttachToProcess(activeProcess);
+					break;
+				}
+			}
 		}
 
 		private void MainForm_Activated(object sender, EventArgs e)
@@ -82,6 +110,16 @@ namespace SRWE
 			SRWE_Settings.ForceExitSizeMoveMessage = _forceExitSizeMoveCheckBox.Checked;
 		}
 
+
+		private void _aboutLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+		{
+			Process.Start("https://github.com/dtgDTGdtg/SRWE");
+		}
+
+		private void _autoAttachToLastKnownCheckBox_CheckedChanged(object sender, EventArgs e)
+		{
+			SRWE_Settings.AutoAttachToLastKnownProcess = _autoAttachToLastKnownCheckBox.Checked;
+		}
 
 		private void TIMER_MAIN_Tick(object sender, EventArgs e)
 		{
@@ -105,11 +143,16 @@ namespace SRWE
 
 			if (opd.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
 			{
-				m_selectedProcess = opd.SelectedProcess;
-				UpdateCaption();
-				UpdateWindowTree();
-				SRWE_Settings.AddRecentProcess(m_selectedProcess.ProcessName);
+				AttachToProcess(opd.SelectedProcess);
 			}
+		}
+
+		private void AttachToProcess(Process toAttachTo)
+		{
+			m_selectedProcess = toAttachTo;
+			UpdateCaption();
+			UpdateWindowTree();
+			SRWE_Settings.AddRecentProcess(m_selectedProcess.ProcessName);
 		}
 
 		private void TSI_REFRESH_Click(object sender, EventArgs e)
@@ -858,6 +901,7 @@ namespace SRWE
 		private void ReflectSettingsInUI()
 		{
 			_forceExitSizeMoveCheckBox.Checked = SRWE_Settings.ForceExitSizeMoveMessage;
+			_autoAttachToLastKnownCheckBox.Checked = SRWE_Settings.AutoAttachToLastKnownProcess;
 			// grab the first profile (if any) and use that folder as the default folder for profiles. 
 			var firstProfile = SRWE_Settings.RecentProfiles.FirstOrDefault();
 			if(!string.IsNullOrEmpty(firstProfile))
@@ -872,11 +916,6 @@ namespace SRWE
 					// folder name is wrong, nothing we can do, silently skip it. 
 				}
 			}
-		}
-
-		private void _aboutLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-		{
-			Process.Start("https://github.com/dtgDTGdtg/SRWE");
 		}
 	}
 }

@@ -50,8 +50,8 @@
 			System.Windows.Forms.Label label2;
 			System.Windows.Forms.Label label13;
 			System.Windows.Forms.Label label12;
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			this.BTN_ALIGN_BOTTOM = new System.Windows.Forms.Button();
 			this.BTN_ALIGN_RIGHT = new System.Windows.Forms.Button();
@@ -75,12 +75,7 @@
 			this.EDT_WINRC_WIDTH = new System.Windows.Forms.TextBox();
 			this.EDT_WINRC_X = new System.Windows.Forms.TextBox();
 			this.TS_MAIN = new System.Windows.Forms.ToolStrip();
-			this.TSI_OPEN_PROCESS = new System.Windows.Forms.ToolStripButton();
-			this.TSI_REFRESH = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-			this.TSI_PROFILE_LOAD = new System.Windows.Forms.ToolStripButton();
-			this.TSI_PROFILE_SAVE = new System.Windows.Forms.ToolStripButton();
-			this.TSI_PROFILE_RECENT = new System.Windows.Forms.ToolStripDropDownButton();
 			this.TV_WINDOW_TREE = new System.Windows.Forms.TreeView();
 			this.TABCTRL_MAIN = new System.Windows.Forms.TabControl();
 			this.TABPG_GENERAL = new System.Windows.Forms.TabPage();
@@ -105,6 +100,12 @@
 			this.TIMER_HOTKEYS = new System.Windows.Forms.Timer(this.components);
 			this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
 			this._aboutLinkLabel = new System.Windows.Forms.LinkLabel();
+			this._autoAttachToLastKnownCheckBox = new System.Windows.Forms.CheckBox();
+			this.TSI_OPEN_PROCESS = new System.Windows.Forms.ToolStripButton();
+			this.TSI_REFRESH = new System.Windows.Forms.ToolStripButton();
+			this.TSI_PROFILE_LOAD = new System.Windows.Forms.ToolStripButton();
+			this.TSI_PROFILE_SAVE = new System.Windows.Forms.ToolStripButton();
+			this.TSI_PROFILE_RECENT = new System.Windows.Forms.ToolStripDropDownButton();
 			groupBox2 = new System.Windows.Forms.GroupBox();
 			groupBox3 = new System.Windows.Forms.GroupBox();
 			label16 = new System.Windows.Forms.Label();
@@ -241,8 +242,8 @@
 			groupBox3.Controls.Add(this.EDT_HANDLE);
 			groupBox3.Location = new System.Drawing.Point(294, 6);
 			groupBox3.Name = "groupBox3";
-			groupBox3.Size = new System.Drawing.Size(310, 362);
-			groupBox3.TabIndex = 5;
+			groupBox3.Size = new System.Drawing.Size(310, 359);
+			groupBox3.TabIndex = 7;
 			groupBox3.TabStop = false;
 			groupBox3.Text = "Window Info";
 			// 
@@ -616,55 +617,10 @@
 			this.TS_MAIN.TabIndex = 0;
 			this.TS_MAIN.Text = "Main Toolbar";
 			// 
-			// TSI_OPEN_PROCESS
-			// 
-			this.TSI_OPEN_PROCESS.Image = global::SRWE.Properties.Resources.Application_EXE;
-			this.TSI_OPEN_PROCESS.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.TSI_OPEN_PROCESS.Name = "TSI_OPEN_PROCESS";
-			this.TSI_OPEN_PROCESS.Size = new System.Drawing.Size(169, 22);
-			this.TSI_OPEN_PROCESS.Text = "Select running Application";
-			this.TSI_OPEN_PROCESS.Click += new System.EventHandler(this.TSI_OPEN_PROCESS_Click);
-			// 
-			// TSI_REFRESH
-			// 
-			this.TSI_REFRESH.Image = global::SRWE.Properties.Resources.RefreshTree;
-			this.TSI_REFRESH.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.TSI_REFRESH.Name = "TSI_REFRESH";
-			this.TSI_REFRESH.Size = new System.Drawing.Size(147, 22);
-			this.TSI_REFRESH.Text = "Refresh Window Tree";
-			this.TSI_REFRESH.Click += new System.EventHandler(this.TSI_REFRESH_Click);
-			this.TSI_REFRESH.EnabledChanged += new System.EventHandler(this.TSI_REFRESH_EnabledChanged);
-			// 
 			// toolStripSeparator1
 			// 
 			this.toolStripSeparator1.Name = "toolStripSeparator1";
 			this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
-			// 
-			// TSI_PROFILE_LOAD
-			// 
-			this.TSI_PROFILE_LOAD.Image = global::SRWE.Properties.Resources.LoadProfile;
-			this.TSI_PROFILE_LOAD.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.TSI_PROFILE_LOAD.Name = "TSI_PROFILE_LOAD";
-			this.TSI_PROFILE_LOAD.Size = new System.Drawing.Size(90, 22);
-			this.TSI_PROFILE_LOAD.Text = "Load Profile";
-			this.TSI_PROFILE_LOAD.Click += new System.EventHandler(this.TSI_PROFILE_LOAD_Click);
-			// 
-			// TSI_PROFILE_SAVE
-			// 
-			this.TSI_PROFILE_SAVE.Image = global::SRWE.Properties.Resources.SaveProfile;
-			this.TSI_PROFILE_SAVE.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.TSI_PROFILE_SAVE.Name = "TSI_PROFILE_SAVE";
-			this.TSI_PROFILE_SAVE.Size = new System.Drawing.Size(90, 22);
-			this.TSI_PROFILE_SAVE.Text = "Save Profile";
-			this.TSI_PROFILE_SAVE.Click += new System.EventHandler(this.TSI_PROFILE_SAVE_Click);
-			// 
-			// TSI_PROFILE_RECENT
-			// 
-			this.TSI_PROFILE_RECENT.Image = global::SRWE.Properties.Resources.Recent;
-			this.TSI_PROFILE_RECENT.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.TSI_PROFILE_RECENT.Name = "TSI_PROFILE_RECENT";
-			this.TSI_PROFILE_RECENT.Size = new System.Drawing.Size(117, 22);
-			this.TSI_PROFILE_RECENT.Text = "Recent Profiles";
 			// 
 			// TV_WINDOW_TREE
 			// 
@@ -695,6 +651,7 @@
 			// 
 			// TABPG_GENERAL
 			// 
+			this.TABPG_GENERAL.Controls.Add(this._autoAttachToLastKnownCheckBox);
 			this.TABPG_GENERAL.Controls.Add(this._forceExitSizeMoveCheckBox);
 			this.TABPG_GENERAL.Controls.Add(groupBox2);
 			this.TABPG_GENERAL.Controls.Add(groupBox3);
@@ -716,7 +673,7 @@
 			this._forceExitSizeMoveCheckBox.Location = new System.Drawing.Point(21, 196);
 			this._forceExitSizeMoveCheckBox.Name = "_forceExitSizeMoveCheckBox";
 			this._forceExitSizeMoveCheckBox.Size = new System.Drawing.Size(255, 18);
-			this._forceExitSizeMoveCheckBox.TabIndex = 4;
+			this._forceExitSizeMoveCheckBox.TabIndex = 2;
 			this._forceExitSizeMoveCheckBox.Text = "Force EXITSIZEMOVE after window resize";
 			this.toolTip1.SetToolTip(this._forceExitSizeMoveCheckBox, "Check this checkbox if the game stretches the viewport after window resizing inst" +
         "ead of resizing the viewport. Sometimes required for Frostbyte games like Dragon" +
@@ -726,31 +683,31 @@
 			// 
 			// BTN_TASKBAR_MODE
 			// 
-			this.BTN_TASKBAR_MODE.Location = new System.Drawing.Point(67, 295);
+			this.BTN_TASKBAR_MODE.Location = new System.Drawing.Point(67, 326);
 			this.BTN_TASKBAR_MODE.Name = "BTN_TASKBAR_MODE";
 			this.BTN_TASKBAR_MODE.Size = new System.Drawing.Size(160, 25);
-			this.BTN_TASKBAR_MODE.TabIndex = 4;
-			this.BTN_TASKBAR_MODE.Text = "Taskbar mode";
+			this.BTN_TASKBAR_MODE.TabIndex = 6;
+			this.BTN_TASKBAR_MODE.Text = "&Taskbar mode";
 			this.BTN_TASKBAR_MODE.UseVisualStyleBackColor = true;
 			this.BTN_TASKBAR_MODE.Click += new System.EventHandler(this.BTN_TASKBAR_MODE_Click);
 			// 
 			// BTN_FAKE_FULLSCREEN
 			// 
-			this.BTN_FAKE_FULLSCREEN.Location = new System.Drawing.Point(67, 264);
+			this.BTN_FAKE_FULLSCREEN.Location = new System.Drawing.Point(67, 295);
 			this.BTN_FAKE_FULLSCREEN.Name = "BTN_FAKE_FULLSCREEN";
 			this.BTN_FAKE_FULLSCREEN.Size = new System.Drawing.Size(160, 25);
-			this.BTN_FAKE_FULLSCREEN.TabIndex = 3;
-			this.BTN_FAKE_FULLSCREEN.Text = "Fake fullscreen";
+			this.BTN_FAKE_FULLSCREEN.TabIndex = 5;
+			this.BTN_FAKE_FULLSCREEN.Text = "&Fake fullscreen";
 			this.BTN_FAKE_FULLSCREEN.UseVisualStyleBackColor = true;
 			this.BTN_FAKE_FULLSCREEN.Click += new System.EventHandler(this.BTN_FAKE_FULLSCREEN_Click);
 			// 
 			// BTN_REM_BORDERS
 			// 
-			this.BTN_REM_BORDERS.Location = new System.Drawing.Point(67, 233);
+			this.BTN_REM_BORDERS.Location = new System.Drawing.Point(67, 264);
 			this.BTN_REM_BORDERS.Name = "BTN_REM_BORDERS";
 			this.BTN_REM_BORDERS.Size = new System.Drawing.Size(160, 25);
-			this.BTN_REM_BORDERS.TabIndex = 2;
-			this.BTN_REM_BORDERS.Text = "Remove borders";
+			this.BTN_REM_BORDERS.TabIndex = 4;
+			this.BTN_REM_BORDERS.Text = "Remove &borders";
 			this.BTN_REM_BORDERS.UseVisualStyleBackColor = true;
 			this.BTN_REM_BORDERS.Click += new System.EventHandler(this.BTN_REM_BORDERS_Click);
 			// 
@@ -767,7 +724,7 @@
 			this.TABPG_STYLES.Location = new System.Drawing.Point(4, 22);
 			this.TABPG_STYLES.Name = "TABPG_STYLES";
 			this.TABPG_STYLES.Padding = new System.Windows.Forms.Padding(3);
-			this.TABPG_STYLES.Size = new System.Drawing.Size(610, 406);
+			this.TABPG_STYLES.Size = new System.Drawing.Size(610, 382);
 			this.TABPG_STYLES.TabIndex = 2;
 			this.TABPG_STYLES.Text = "Window Styles";
 			this.TABPG_STYLES.UseVisualStyleBackColor = true;
@@ -821,15 +778,15 @@
 			this.DGV_WS_EX.AllowUserToResizeRows = false;
 			this.DGV_WS_EX.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle5.Font = new System.Drawing.Font("Tahoma", 9F);
-			dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-			dataGridViewCellStyle5.Padding = new System.Windows.Forms.Padding(0, 3, 0, 4);
-			dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.DGV_WS_EX.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+			dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle1.Font = new System.Drawing.Font("Tahoma", 9F);
+			dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(0, 3, 0, 4);
+			dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.DGV_WS_EX.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
 			this.DGV_WS_EX.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.DGV_WS_EX.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewCheckBoxColumn1,
@@ -867,15 +824,15 @@
 			this.DGV_WS.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle6.Font = new System.Drawing.Font("Tahoma", 9F);
-			dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-			dataGridViewCellStyle6.Padding = new System.Windows.Forms.Padding(0, 3, 0, 4);
-			dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.DGV_WS.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
+			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle2.Font = new System.Drawing.Font("Tahoma", 9F);
+			dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(0, 3, 0, 4);
+			dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.DGV_WS.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
 			this.DGV_WS.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.DGV_WS.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.COL_ACTIVATED,
@@ -941,11 +898,69 @@
 			this._aboutLinkLabel.Location = new System.Drawing.Point(282, 439);
 			this._aboutLinkLabel.Name = "_aboutLinkLabel";
 			this._aboutLinkLabel.Size = new System.Drawing.Size(51, 14);
-			this._aboutLinkLabel.TabIndex = 4;
+			this._aboutLinkLabel.TabIndex = 3;
 			this._aboutLinkLabel.TabStop = true;
 			this._aboutLinkLabel.Text = "[About]";
 			this.toolTip1.SetToolTip(this._aboutLinkLabel, "Visit https://github.com/dtgDTGdtg/SRWE");
 			this._aboutLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this._aboutLinkLabel_LinkClicked);
+			// 
+			// _autoAttachToLastKnownCheckBox
+			// 
+			this._autoAttachToLastKnownCheckBox.AutoSize = true;
+			this._autoAttachToLastKnownCheckBox.Location = new System.Drawing.Point(21, 220);
+			this._autoAttachToLastKnownCheckBox.Name = "_autoAttachToLastKnownCheckBox";
+			this._autoAttachToLastKnownCheckBox.Size = new System.Drawing.Size(216, 18);
+			this._autoAttachToLastKnownCheckBox.TabIndex = 3;
+			this._autoAttachToLastKnownCheckBox.Text = "Auto-attach to last known process";
+			this.toolTip1.SetToolTip(this._autoAttachToLastKnownCheckBox, "Check this checkbox if you want SRWE to attach automatically at startup to the la" +
+        "st process known");
+			this._autoAttachToLastKnownCheckBox.UseVisualStyleBackColor = true;
+			this._autoAttachToLastKnownCheckBox.CheckedChanged += new System.EventHandler(this._autoAttachToLastKnownCheckBox_CheckedChanged);
+			// 
+			// TSI_OPEN_PROCESS
+			// 
+			this.TSI_OPEN_PROCESS.Image = global::SRWE.Properties.Resources.Application_EXE;
+			this.TSI_OPEN_PROCESS.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.TSI_OPEN_PROCESS.Name = "TSI_OPEN_PROCESS";
+			this.TSI_OPEN_PROCESS.Size = new System.Drawing.Size(169, 22);
+			this.TSI_OPEN_PROCESS.Text = "&Select running Application";
+			this.TSI_OPEN_PROCESS.Click += new System.EventHandler(this.TSI_OPEN_PROCESS_Click);
+			// 
+			// TSI_REFRESH
+			// 
+			this.TSI_REFRESH.Image = global::SRWE.Properties.Resources.RefreshTree;
+			this.TSI_REFRESH.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.TSI_REFRESH.Name = "TSI_REFRESH";
+			this.TSI_REFRESH.Size = new System.Drawing.Size(147, 22);
+			this.TSI_REFRESH.Text = "&Refresh Window Tree";
+			this.TSI_REFRESH.Click += new System.EventHandler(this.TSI_REFRESH_Click);
+			this.TSI_REFRESH.EnabledChanged += new System.EventHandler(this.TSI_REFRESH_EnabledChanged);
+			// 
+			// TSI_PROFILE_LOAD
+			// 
+			this.TSI_PROFILE_LOAD.Image = global::SRWE.Properties.Resources.LoadProfile;
+			this.TSI_PROFILE_LOAD.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.TSI_PROFILE_LOAD.Name = "TSI_PROFILE_LOAD";
+			this.TSI_PROFILE_LOAD.Size = new System.Drawing.Size(90, 22);
+			this.TSI_PROFILE_LOAD.Text = "&Load Profile";
+			this.TSI_PROFILE_LOAD.Click += new System.EventHandler(this.TSI_PROFILE_LOAD_Click);
+			// 
+			// TSI_PROFILE_SAVE
+			// 
+			this.TSI_PROFILE_SAVE.Image = global::SRWE.Properties.Resources.SaveProfile;
+			this.TSI_PROFILE_SAVE.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.TSI_PROFILE_SAVE.Name = "TSI_PROFILE_SAVE";
+			this.TSI_PROFILE_SAVE.Size = new System.Drawing.Size(90, 22);
+			this.TSI_PROFILE_SAVE.Text = "&Save Profile";
+			this.TSI_PROFILE_SAVE.Click += new System.EventHandler(this.TSI_PROFILE_SAVE_Click);
+			// 
+			// TSI_PROFILE_RECENT
+			// 
+			this.TSI_PROFILE_RECENT.Image = global::SRWE.Properties.Resources.Recent;
+			this.TSI_PROFILE_RECENT.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.TSI_PROFILE_RECENT.Name = "TSI_PROFILE_RECENT";
+			this.TSI_PROFILE_RECENT.Size = new System.Drawing.Size(117, 22);
+			this.TSI_PROFILE_RECENT.Text = "Recent &Profiles";
 			// 
 			// MainForm
 			// 
@@ -1037,5 +1052,6 @@
 		private System.Windows.Forms.CheckBox _forceExitSizeMoveCheckBox;
 		private System.Windows.Forms.ToolTip toolTip1;
 		private System.Windows.Forms.LinkLabel _aboutLinkLabel;
+		private System.Windows.Forms.CheckBox _autoAttachToLastKnownCheckBox;
 	}
 }

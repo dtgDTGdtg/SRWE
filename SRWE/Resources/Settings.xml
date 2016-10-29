@@ -3,6 +3,7 @@
 	<Settings>
 		<UpdateInterval Value="1000" />
 		<ForceExitSizeMoveMessage Value="false"/>
+		<AutoAttachToLastKnownProcess Value="false"/>
 	</Settings>
 	<RecentProcesses>
 	</RecentProcesses>

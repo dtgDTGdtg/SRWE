@@ -13,6 +13,7 @@ namespace SRWE
 	static class SRWE_Defaults
 	{
 		internal static readonly bool ForceExitSizeMoveMessage = false;
+		internal static readonly bool AutoAttachToLastKnownProcess = false;
 		internal static readonly int MaxNumberOfRecentProfiles = 20;
 	}
 
@@ -24,7 +25,7 @@ namespace SRWE
 		private static string s_settingsPath;
 		private static XmlDocument s_xmlSettings, s_xmlDefaultSettings;
 		private static int s_nUpdateInterval;
-		private static bool s_bForceExitSizeMoveMessage;
+		private static bool s_bForceExitSizeMoveMessage, s_bAutoAttachToLastKnownProcess;
 		private static List<string> s_recentProfiles;
 		private static List<string> s_recentProcesses;
         private static List<SRWE_HotKey> s_hotKeys = new List<SRWE_HotKey>();
@@ -185,19 +186,31 @@ namespace SRWE
 
 		private static void LoadSettings()
 		{
-			s_nUpdateInterval = SRWE_Utility.SAFE_String_2_Int(s_xmlSettings.DocumentElement["Settings"]["UpdateInterval"].Attributes["Value"].Value, 1000);
-			var forceExitSizeMoveMessageElement = s_xmlSettings.DocumentElement["Settings"]["ForceExitSizeMoveMessage"];
+			var settingsElement = s_xmlSettings.DocumentElement["Settings"];
+			s_nUpdateInterval = SRWE_Utility.SAFE_String_2_Int(settingsElement["UpdateInterval"].Attributes["Value"].Value, 1000);
+			var forceExitSizeMoveMessageElement = settingsElement["ForceExitSizeMoveMessage"];
 			if(forceExitSizeMoveMessageElement == null)
 			{
 				// migrate settings file.
-				forceExitSizeMoveMessageElement = s_xmlSettings.CreateElement("ForceExitSizeMoveMessage");
-				s_xmlSettings.DocumentElement["Settings"].AppendChild(forceExitSizeMoveMessageElement);
-				forceExitSizeMoveMessageElement.Attributes.Append(s_xmlSettings.CreateAttribute("Value"));
+				forceExitSizeMoveMessageElement = SRWE_Utility.AppendChildElement(s_xmlSettings, settingsElement, "ForceExitSizeMoveMessage");
+				SRWE_Utility.AppendAttribute(s_xmlSettings, forceExitSizeMoveMessageElement, "Value");
 				SetForceExitSizeMoveMessageValue();
 			}
 			else
 			{
 				s_bForceExitSizeMoveMessage = SRWE_Utility.SAFE_String_2_Bool(forceExitSizeMoveMessageElement.Attributes["Value"].Value, SRWE_Defaults.ForceExitSizeMoveMessage);
+			}
+			var autoAttachToLastKnownProcessElement = settingsElement["AutoAttachToLastKnownProcess"];
+			if(autoAttachToLastKnownProcessElement==null)
+			{
+				// migrate settings file
+				autoAttachToLastKnownProcessElement = SRWE_Utility.AppendChildElement(s_xmlSettings, settingsElement, "AutoAttachToLastKnownProcess");
+				SRWE_Utility.AppendAttribute(s_xmlSettings, autoAttachToLastKnownProcessElement, "Value");
+				SetAutoAttachToLastKnownProcessValue();
+			}
+			else
+			{
+				s_bAutoAttachToLastKnownProcess = SRWE_Utility.SAFE_String_2_Bool(autoAttachToLastKnownProcessElement.Attributes["Value"].Value, SRWE_Defaults.AutoAttachToLastKnownProcess);
 			}
 
 			if(s_nUpdateInterval < 100)
@@ -222,10 +235,15 @@ namespace SRWE
 			foreach(XmlNode hotkey in xmlNodes) s_hotKeys.Add(new SRWE_HotKey((XmlElement)hotkey));
 		}
 
-
 		private static void SetForceExitSizeMoveMessageValue()
 		{
 			s_xmlSettings.DocumentElement["Settings"]["ForceExitSizeMoveMessage"].Attributes["Value"].Value = XmlConvert.ToString(s_bForceExitSizeMoveMessage);
+		}
+
+
+		private static void SetAutoAttachToLastKnownProcessValue()
+		{
+			s_xmlSettings.DocumentElement["Settings"]["AutoAttachToLastKnownProcess"].Attributes["Value"].Value = XmlConvert.ToString(s_bAutoAttachToLastKnownProcess);
 		}
 
 
@@ -254,9 +272,28 @@ namespace SRWE
 			get { return s_bForceExitSizeMoveMessage; }
 			set
 			{
-				s_bForceExitSizeMoveMessage = value;
-				SetForceExitSizeMoveMessageValue();
-				s_xmlSettings.Save(s_settingsPath);
+				bool currentValue = s_bForceExitSizeMoveMessage;
+				if(value != currentValue)
+				{
+					s_bForceExitSizeMoveMessage = value;
+					SetForceExitSizeMoveMessageValue();
+					s_xmlSettings.Save(s_settingsPath);
+				}
+			}
+		}
+
+		public static bool AutoAttachToLastKnownProcess
+		{
+			get { return s_bAutoAttachToLastKnownProcess; }
+			set
+			{
+				bool currentValue = s_bAutoAttachToLastKnownProcess;
+				if(currentValue != value)
+				{
+					s_bAutoAttachToLastKnownProcess = value;
+					SetAutoAttachToLastKnownProcessValue();
+					s_xmlSettings.Save(s_settingsPath);
+				}
 			}
 		}
 	}
@@ -266,6 +303,20 @@ namespace SRWE
 	/// </summary>
 	static class SRWE_Utility
 	{
+		public static XmlElement AppendChildElement(XmlDocument document, XmlNode parent, string elementName)
+		{
+			var toAdd = document.CreateElement(elementName);
+			parent.AppendChild(toAdd);
+			return toAdd;
+		}
+
+		public static XmlAttribute AppendAttribute(XmlDocument document, XmlNode node, string attributeName)
+		{
+			var toAdd = document.CreateAttribute(attributeName);
+			node.Attributes.Append(toAdd);
+			return toAdd;
+		}
+
 		public static int SAFE_String_2_Int(string value, int nDefValue)
 		{
 			int nResult;
