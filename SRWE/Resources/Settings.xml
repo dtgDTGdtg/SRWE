@@ -1,21 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<SRWE Version="2.2">
-  <Settings>
-    <UpdateInterval Value="1000" />
-  </Settings>
-  <RecentProcesses>
-  </RecentProcesses>
-  <RecentProfiles>
-  </RecentProfiles>
-  <HotKeys>
-    <!--
+<SRWE Version="2.3">
+	<Settings>
+		<UpdateInterval Value="1000" />
+		<ForceExitSizeMoveMessage Value="false"/>
+	</Settings>
+	<RecentProcesses>
+	</RecentProcesses>
+	<RecentProfiles>
+	</RecentProfiles>
+	<HotKeys>
+		<!--
       CTRL="1" = Means you should hold CTRL key down when pressing a hot key.
       CTRL="0" = Means you can press a hot key without CTRL key combination.
       ALT and SHIFT work in the same way as the CTRL.
       Valid key name list can be found on MSDN:
       http://msdn.microsoft.com/en-us/library/system.windows.forms.keys(v=vs.100).aspx
     -->
-    <HotKey Name="RemoveBorders" CTRL="0" ALT="0" SHIFT="1">F6</HotKey>
-    <HotKey Name="FakeFullScreen" CTRL="0" ALT="0" SHIFT="1">F7</HotKey>
-  </HotKeys>
+		<HotKey Name="RemoveBorders" CTRL="0" ALT="0" SHIFT="1">F6</HotKey>
+		<HotKey Name="FakeFullScreen" CTRL="0" ALT="0" SHIFT="1">F7</HotKey>
+	</HotKeys>
 </SRWE>

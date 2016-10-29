@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Xml;
 using System.Xml.XPath;
+using System.Linq;
 
 namespace SRWE
 {
@@ -35,6 +36,7 @@ namespace SRWE
 		public MainForm()
 		{
 			InitializeComponent();
+			this.MinimumSize = this.Size;
 
 			m_states = States.None;
 
@@ -42,16 +44,24 @@ namespace SRWE
 			SFD_PROFILE.InitialDirectory = OFD_PROFILE.InitialDirectory;
 			TIMER_MAIN.Interval = SRWE_Settings.UpdateInterval;
 
+			// initialize Recent profile menu with proper default elements
+			for(int i = 0; i < SRWE_Defaults.MaxNumberOfRecentProfiles; i++)
+			{
+				var toAdd = new ToolStripMenuItem() {
+					Name = "TSMI_PROFILE1",
+					Text = "Profile-" + i
+				};
+				toAdd.Click += new System.EventHandler(this.TSMI_PROFILE_Click);
+				this.TSI_PROFILE_RECENT.DropDownItems.Add(toAdd);
+			}
 			InitializeWindowStyles();
 		}
 
-//====================================================================================================
 #region Events
-//====================================================================================================
 		private void MainForm_Load(object sender, EventArgs e)
 		{
-			LBL_ABOUT.Text = Application.ProductName + " v" + Application.ProductVersion + " © _DTG_ 2012-2014";
-
+			_aboutLinkLabel.Text = Application.ProductName + " v" + Application.ProductVersion + ".  © _DTG_ / Others";
+			ReflectSettingsInUI();
 			UpdateCaption();
 			RefreshRecentProfilesMenu();
 		}
@@ -65,6 +75,13 @@ namespace SRWE
 			UpdateGUI(false);
 			RefreshData(false);
 		}
+
+
+		private void _forceExitSizeMoveCheckBox_CheckedChanged(object sender, EventArgs e)
+		{
+			SRWE_Settings.ForceExitSizeMoveMessage = _forceExitSizeMoveCheckBox.Checked;
+		}
+
 
 		private void TIMER_MAIN_Tick(object sender, EventArgs e)
 		{
@@ -385,15 +402,9 @@ namespace SRWE
 				UpdateCaption();
 			}
 		}
-//====================================================================================================
 #endregion
-//====================================================================================================
+		
 
-
-
-//====================================================================================================
-#region Functions
-//====================================================================================================
 		private void InitializeWindowStyles()
 		{
 			// Init DGV_WS
@@ -640,7 +651,10 @@ namespace SRWE
 				List<Window> wndList = Window.GetProcessWindows(m_selectedProcess);
 				CreateTreeElements(TV_WINDOW_TREE.Nodes, wndList);
 				TV_WINDOW_TREE.Focus();
-				if (TV_WINDOW_TREE.Nodes.Count > 0) TV_WINDOW_TREE.SelectedNode = TV_WINDOW_TREE.Nodes[0];
+				if(TV_WINDOW_TREE.Nodes.Count > 0)
+				{
+					TV_WINDOW_TREE.SelectedNode = TV_WINDOW_TREE.Nodes[0];
+				}
 			}
 		}
 
@@ -839,8 +853,30 @@ namespace SRWE
                 window.ApplyChanges();
             }
         }
-//====================================================================================================
-#endregion
-//====================================================================================================
+
+
+		private void ReflectSettingsInUI()
+		{
+			_forceExitSizeMoveCheckBox.Checked = SRWE_Settings.ForceExitSizeMoveMessage;
+			// grab the first profile (if any) and use that folder as the default folder for profiles. 
+			var firstProfile = SRWE_Settings.RecentProfiles.FirstOrDefault();
+			if(!string.IsNullOrEmpty(firstProfile))
+			{
+				try
+				{
+					OFD_PROFILE.InitialDirectory = Path.GetDirectoryName(firstProfile);
+					SFD_PROFILE.InitialDirectory = OFD_PROFILE.InitialDirectory;
+				}
+				catch
+				{
+					// folder name is wrong, nothing we can do, silently skip it. 
+				}
+			}
+		}
+
+		private void _aboutLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+		{
+			Process.Start("https://github.com/dtgDTGdtg/SRWE");
+		}
 	}
 }

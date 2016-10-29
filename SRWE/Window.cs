@@ -209,7 +209,10 @@ namespace SRWE
 				WinAPI.ShowWindow(m_hWnd, WinAPI.SW_SHOWNOACTIVATE);
 
 			WinAPI.SetWindowPos(m_hWnd, 0, m_relWindowRC.left, m_relWindowRC.top, m_relWindowRC.Width, m_relWindowRC.Height, uFlags);
-            WinAPI.SendMessage(m_hWnd, WinAPI.WM_EXITSIZEMOVE, 0, 0);
+			if(SRWE_Settings.ForceExitSizeMoveMessage)
+			{
+				WinAPI.SendMessage(m_hWnd, WinAPI.WM_EXITSIZEMOVE, 0, 0);
+			}
 			m_changes = Changes.None;
 		}
 

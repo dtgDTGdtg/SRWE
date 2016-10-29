@@ -10,20 +10,33 @@ using System.Windows.Forms;
 
 namespace SRWE
 {
+	static class SRWE_Defaults
+	{
+		internal static readonly bool ForceExitSizeMoveMessage = false;
+		internal static readonly int MaxNumberOfRecentProfiles = 20;
+	}
+
 	/// <summary>
 	/// SRWE_Settings class.
 	/// </summary>
 	static class SRWE_Settings
 	{
 		private static string s_settingsPath;
-		private static XmlDocument s_xmlSettings;
+		private static XmlDocument s_xmlSettings, s_xmlDefaultSettings;
 		private static int s_nUpdateInterval;
+		private static bool s_bForceExitSizeMoveMessage;
 		private static List<string> s_recentProfiles;
 		private static List<string> s_recentProcesses;
         private static List<SRWE_HotKey> s_hotKeys = new List<SRWE_HotKey>();
 
 		static SRWE_Settings()
 		{
+			using(MemoryStream ms = new MemoryStream(Properties.Resources.XML_Settings))
+			{
+				s_xmlDefaultSettings = new XmlDocument();
+				s_xmlDefaultSettings.Load(ms);
+				ms.Close();
+			}
 			try
 			{
 				s_settingsPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
@@ -31,84 +44,38 @@ namespace SRWE
 				Directory.CreateDirectory(s_settingsPath);
 				s_settingsPath = Path.Combine(s_settingsPath, "Settings.xml");
 
-				if (!File.Exists(s_settingsPath))
-					File.WriteAllBytes(s_settingsPath, Properties.Resources.XML_Settings);
-
-				s_xmlSettings = new XmlDocument();
-				s_xmlSettings.Load(s_settingsPath);
-
-				if (!CheckSettingsVersion(s_xmlSettings.DocumentElement.Attributes["Version"]))
+				if(!File.Exists(s_settingsPath))
 				{
+					File.WriteAllBytes(s_settingsPath, Properties.Resources.XML_Settings);
+				}
+				s_xmlSettings = new XmlDocument();
+				try
+				{
+					s_xmlSettings.Load(s_settingsPath);
+				}
+				catch
+				{
+					// failure during load, write out new settings file and load that one instead. This is nicer than flushing any older settings file as 
+					// we can now migrate any old file to new versions without flushing old settings. 
 					File.WriteAllBytes(s_settingsPath, Properties.Resources.XML_Settings);
 					s_xmlSettings.Load(s_settingsPath);
 				}
+				bool versionMisMatch = !CheckSettingsVersion(s_xmlSettings.DocumentElement.Attributes["Version"]);
 				LoadSettings();
+				if(versionMisMatch)
+				{
+					// bump version to one in default xml document
+					s_xmlSettings.DocumentElement.Attributes["Version"].Value = s_xmlDefaultSettings.DocumentElement.Attributes["Version"].Value;
+					// write the settings out again, as they've been migrated to a new version
+					s_xmlSettings.Save(s_settingsPath);
+				}
 			}
 			catch
 			{
-				MemoryStream ms = new MemoryStream(Properties.Resources.XML_Settings);
-				s_xmlSettings = new XmlDocument();
-				s_xmlSettings.Load(ms);
-				ms.Close();
+				s_xmlSettings = (XmlDocument)s_xmlDefaultSettings.Clone();
 				LoadSettings();
 			}
 		}
-
-		private static bool CheckSettingsVersion(XmlAttribute attribVersion)
-		{
-			MemoryStream ms = new MemoryStream(Properties.Resources.XML_Settings);
-			XmlDocument xmlActualSettings = new XmlDocument();
-			xmlActualSettings.Load(ms);
-			ms.Close();
-
-			return (attribVersion != null && attribVersion.Value == xmlActualSettings.DocumentElement.Attributes["Version"].Value);
-		}
-
-		private static void LoadSettings()
-		{
-			s_nUpdateInterval = SRWE_Utility.SAFE_String_2_Int(s_xmlSettings.DocumentElement["Settings"]["UpdateInterval"].Attributes["Value"].Value, 1000);
-
-			if (s_nUpdateInterval < 100)
-				s_nUpdateInterval = 100;
-			else if (s_nUpdateInterval > 30000)
-				s_nUpdateInterval = 30000;
-
-			XmlNodeList xmlNodes = s_xmlSettings.DocumentElement.SelectNodes("RecentProcesses/Process");
-			s_recentProcesses = new List<string>();
-
-			foreach (XmlNode xmlItem in xmlNodes)
-				s_recentProcesses.Add(xmlItem.Attributes["Name"].Value);
-
-			xmlNodes = s_xmlSettings.DocumentElement.SelectNodes("RecentProfiles/Profile");
-			s_recentProfiles = new List<string>();
-
-			foreach (XmlNode xmlItem in xmlNodes)
-				s_recentProfiles.Add(xmlItem.Attributes["FilePath"].Value);
-
-            s_hotKeys.Clear();
-            xmlNodes = s_xmlSettings.DocumentElement.SelectNodes("HotKeys/HotKey");
-            foreach (XmlNode hotkey in xmlNodes) s_hotKeys.Add(new SRWE_HotKey((XmlElement)hotkey));
-		}
-
-		public static int UpdateInterval
-		{
-			get { return s_nUpdateInterval; }
-		}
-
-		public static List<string> RecentProcesses
-		{
-			get { return s_recentProcesses; }
-		}
-
-		public static List<string> RecentProfiles
-		{
-			get { return s_recentProfiles; }
-		}
-
-        public static List<SRWE_HotKey> HotKeys
-        {
-            get { return s_hotKeys; }
-        }
 
 		public static void AddRecentProcess(string name)
 		{
@@ -126,8 +93,10 @@ namespace SRWE
 			else
 			{
 				XmlNode xmlRecentProcesses = s_xmlSettings.DocumentElement["RecentProcesses"];
-				if (xmlRecentProcesses.ChildNodes.Count > 9) xmlRecentProcesses.RemoveChild(xmlRecentProcesses.ChildNodes[xmlRecentProcesses.ChildNodes.Count - 1]);
-
+				if(xmlRecentProcesses.ChildNodes.Count > SRWE_Defaults.MaxNumberOfRecentProfiles)
+				{
+					xmlRecentProcesses.RemoveChild(xmlRecentProcesses.ChildNodes[xmlRecentProcesses.ChildNodes.Count - 1]);
+				}
 				xmlProcess = s_xmlSettings.CreateElement("Process");
 				xmlProcess.Attributes.Append(s_xmlSettings.CreateAttribute("Name")).Value = name;
 				s_xmlSettings.DocumentElement["RecentProcesses"].PrependChild(xmlProcess);
@@ -205,6 +174,91 @@ namespace SRWE
 
 			s_xmlSettings.Save(s_settingsPath);
 		}
+
+
+
+		private static bool CheckSettingsVersion(XmlAttribute attribVersion)
+		{
+			return (attribVersion != null && attribVersion.Value == s_xmlDefaultSettings.DocumentElement.Attributes["Version"].Value);
+		}
+
+
+		private static void LoadSettings()
+		{
+			s_nUpdateInterval = SRWE_Utility.SAFE_String_2_Int(s_xmlSettings.DocumentElement["Settings"]["UpdateInterval"].Attributes["Value"].Value, 1000);
+			var forceExitSizeMoveMessageElement = s_xmlSettings.DocumentElement["Settings"]["ForceExitSizeMoveMessage"];
+			if(forceExitSizeMoveMessageElement == null)
+			{
+				// migrate settings file.
+				forceExitSizeMoveMessageElement = s_xmlSettings.CreateElement("ForceExitSizeMoveMessage");
+				s_xmlSettings.DocumentElement["Settings"].AppendChild(forceExitSizeMoveMessageElement);
+				forceExitSizeMoveMessageElement.Attributes.Append(s_xmlSettings.CreateAttribute("Value"));
+				SetForceExitSizeMoveMessageValue();
+			}
+			else
+			{
+				s_bForceExitSizeMoveMessage = SRWE_Utility.SAFE_String_2_Bool(forceExitSizeMoveMessageElement.Attributes["Value"].Value, SRWE_Defaults.ForceExitSizeMoveMessage);
+			}
+
+			if(s_nUpdateInterval < 100)
+				s_nUpdateInterval = 100;
+			else if(s_nUpdateInterval > 30000)
+				s_nUpdateInterval = 30000;
+
+			XmlNodeList xmlNodes = s_xmlSettings.DocumentElement.SelectNodes("RecentProcesses/Process");
+			s_recentProcesses = new List<string>();
+
+			foreach(XmlNode xmlItem in xmlNodes)
+				s_recentProcesses.Add(xmlItem.Attributes["Name"].Value);
+
+			xmlNodes = s_xmlSettings.DocumentElement.SelectNodes("RecentProfiles/Profile");
+			s_recentProfiles = new List<string>();
+
+			foreach(XmlNode xmlItem in xmlNodes)
+				s_recentProfiles.Add(xmlItem.Attributes["FilePath"].Value);
+
+			s_hotKeys.Clear();
+			xmlNodes = s_xmlSettings.DocumentElement.SelectNodes("HotKeys/HotKey");
+			foreach(XmlNode hotkey in xmlNodes) s_hotKeys.Add(new SRWE_HotKey((XmlElement)hotkey));
+		}
+
+
+		private static void SetForceExitSizeMoveMessageValue()
+		{
+			s_xmlSettings.DocumentElement["Settings"]["ForceExitSizeMoveMessage"].Attributes["Value"].Value = XmlConvert.ToString(s_bForceExitSizeMoveMessage);
+		}
+
+
+		public static int UpdateInterval
+		{
+			get { return s_nUpdateInterval; }
+		}
+
+		public static List<string> RecentProcesses
+		{
+			get { return s_recentProcesses; }
+		}
+
+		public static List<string> RecentProfiles
+		{
+			get { return s_recentProfiles; }
+		}
+
+		public static List<SRWE_HotKey> HotKeys
+		{
+			get { return s_hotKeys; }
+		}
+
+		public static bool ForceExitSizeMoveMessage
+		{
+			get { return s_bForceExitSizeMoveMessage; }
+			set
+			{
+				s_bForceExitSizeMoveMessage = value;
+				SetForceExitSizeMoveMessageValue();
+				s_xmlSettings.Save(s_settingsPath);
+			}
+		}
 	}
 
 	/// <summary>
@@ -228,6 +282,24 @@ namespace SRWE
 			if (int.TryParse(hexString, NumberStyles.AllowHexSpecifier, CultureInfo.CurrentCulture, out nResult))
 				return nResult;
 			return nDefValue;
+		}
+
+		public static bool SAFE_String_2_Bool(string value, bool defaultValue)
+		{
+			if(string.IsNullOrEmpty(value))
+			{
+				return defaultValue;
+			}
+			// TryParse doesn't work, as it can't deal with 1, 0, and true/false case differences.
+			try
+			{
+				return XmlConvert.ToBoolean(value);
+			}
+			catch
+			{
+				// not a bool
+				return defaultValue;
+			}
 		}
 
         public static string SAFE_XmlNodeValue(XmlNode xmlNode)
