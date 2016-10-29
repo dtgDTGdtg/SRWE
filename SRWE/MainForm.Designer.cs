@@ -75,10 +75,16 @@
 			this.EDT_WINRC_WIDTH = new System.Windows.Forms.TextBox();
 			this.EDT_WINRC_X = new System.Windows.Forms.TextBox();
 			this.TS_MAIN = new System.Windows.Forms.ToolStrip();
+			this.TSI_OPEN_PROCESS = new System.Windows.Forms.ToolStripButton();
+			this.TSI_REFRESH = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+			this.TSI_PROFILE_LOAD = new System.Windows.Forms.ToolStripButton();
+			this.TSI_PROFILE_SAVE = new System.Windows.Forms.ToolStripButton();
+			this.TSI_PROFILE_RECENT = new System.Windows.Forms.ToolStripDropDownButton();
 			this.TV_WINDOW_TREE = new System.Windows.Forms.TreeView();
 			this.TABCTRL_MAIN = new System.Windows.Forms.TabControl();
 			this.TABPG_GENERAL = new System.Windows.Forms.TabPage();
+			this._autoAttachToLastKnownCheckBox = new System.Windows.Forms.CheckBox();
 			this._forceExitSizeMoveCheckBox = new System.Windows.Forms.CheckBox();
 			this.BTN_TASKBAR_MODE = new System.Windows.Forms.Button();
 			this.BTN_FAKE_FULLSCREEN = new System.Windows.Forms.Button();
@@ -100,12 +106,6 @@
 			this.TIMER_HOTKEYS = new System.Windows.Forms.Timer(this.components);
 			this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
 			this._aboutLinkLabel = new System.Windows.Forms.LinkLabel();
-			this._autoAttachToLastKnownCheckBox = new System.Windows.Forms.CheckBox();
-			this.TSI_OPEN_PROCESS = new System.Windows.Forms.ToolStripButton();
-			this.TSI_REFRESH = new System.Windows.Forms.ToolStripButton();
-			this.TSI_PROFILE_LOAD = new System.Windows.Forms.ToolStripButton();
-			this.TSI_PROFILE_SAVE = new System.Windows.Forms.ToolStripButton();
-			this.TSI_PROFILE_RECENT = new System.Windows.Forms.ToolStripDropDownButton();
 			groupBox2 = new System.Windows.Forms.GroupBox();
 			groupBox3 = new System.Windows.Forms.GroupBox();
 			label16 = new System.Windows.Forms.Label();
@@ -242,7 +242,7 @@
 			groupBox3.Controls.Add(this.EDT_HANDLE);
 			groupBox3.Location = new System.Drawing.Point(294, 6);
 			groupBox3.Name = "groupBox3";
-			groupBox3.Size = new System.Drawing.Size(310, 359);
+			groupBox3.Size = new System.Drawing.Size(310, 358);
 			groupBox3.TabIndex = 7;
 			groupBox3.TabStop = false;
 			groupBox3.Text = "Window Info";
@@ -617,10 +617,55 @@
 			this.TS_MAIN.TabIndex = 0;
 			this.TS_MAIN.Text = "Main Toolbar";
 			// 
+			// TSI_OPEN_PROCESS
+			// 
+			this.TSI_OPEN_PROCESS.Image = global::SRWE.Properties.Resources.Application_EXE;
+			this.TSI_OPEN_PROCESS.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.TSI_OPEN_PROCESS.Name = "TSI_OPEN_PROCESS";
+			this.TSI_OPEN_PROCESS.Size = new System.Drawing.Size(169, 22);
+			this.TSI_OPEN_PROCESS.Text = "&Select running Application";
+			this.TSI_OPEN_PROCESS.Click += new System.EventHandler(this.TSI_OPEN_PROCESS_Click);
+			// 
+			// TSI_REFRESH
+			// 
+			this.TSI_REFRESH.Image = global::SRWE.Properties.Resources.RefreshTree;
+			this.TSI_REFRESH.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.TSI_REFRESH.Name = "TSI_REFRESH";
+			this.TSI_REFRESH.Size = new System.Drawing.Size(147, 22);
+			this.TSI_REFRESH.Text = "&Refresh Window Tree";
+			this.TSI_REFRESH.Click += new System.EventHandler(this.TSI_REFRESH_Click);
+			this.TSI_REFRESH.EnabledChanged += new System.EventHandler(this.TSI_REFRESH_EnabledChanged);
+			// 
 			// toolStripSeparator1
 			// 
 			this.toolStripSeparator1.Name = "toolStripSeparator1";
 			this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+			// 
+			// TSI_PROFILE_LOAD
+			// 
+			this.TSI_PROFILE_LOAD.Image = global::SRWE.Properties.Resources.LoadProfile;
+			this.TSI_PROFILE_LOAD.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.TSI_PROFILE_LOAD.Name = "TSI_PROFILE_LOAD";
+			this.TSI_PROFILE_LOAD.Size = new System.Drawing.Size(90, 22);
+			this.TSI_PROFILE_LOAD.Text = "&Load Profile";
+			this.TSI_PROFILE_LOAD.Click += new System.EventHandler(this.TSI_PROFILE_LOAD_Click);
+			// 
+			// TSI_PROFILE_SAVE
+			// 
+			this.TSI_PROFILE_SAVE.Image = global::SRWE.Properties.Resources.SaveProfile;
+			this.TSI_PROFILE_SAVE.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.TSI_PROFILE_SAVE.Name = "TSI_PROFILE_SAVE";
+			this.TSI_PROFILE_SAVE.Size = new System.Drawing.Size(90, 22);
+			this.TSI_PROFILE_SAVE.Text = "&Save Profile";
+			this.TSI_PROFILE_SAVE.Click += new System.EventHandler(this.TSI_PROFILE_SAVE_Click);
+			// 
+			// TSI_PROFILE_RECENT
+			// 
+			this.TSI_PROFILE_RECENT.Image = global::SRWE.Properties.Resources.Recent;
+			this.TSI_PROFILE_RECENT.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.TSI_PROFILE_RECENT.Name = "TSI_PROFILE_RECENT";
+			this.TSI_PROFILE_RECENT.Size = new System.Drawing.Size(117, 22);
+			this.TSI_PROFILE_RECENT.Text = "Recent &Profiles";
 			// 
 			// TV_WINDOW_TREE
 			// 
@@ -667,6 +712,19 @@
 			this.TABPG_GENERAL.Text = "General";
 			this.TABPG_GENERAL.UseVisualStyleBackColor = true;
 			// 
+			// _autoAttachToLastKnownCheckBox
+			// 
+			this._autoAttachToLastKnownCheckBox.AutoSize = true;
+			this._autoAttachToLastKnownCheckBox.Location = new System.Drawing.Point(21, 220);
+			this._autoAttachToLastKnownCheckBox.Name = "_autoAttachToLastKnownCheckBox";
+			this._autoAttachToLastKnownCheckBox.Size = new System.Drawing.Size(216, 18);
+			this._autoAttachToLastKnownCheckBox.TabIndex = 3;
+			this._autoAttachToLastKnownCheckBox.Text = "Auto-attach to last known process";
+			this.toolTip1.SetToolTip(this._autoAttachToLastKnownCheckBox, "Check this checkbox if you want SRWE to attach automatically at startup to the la" +
+        "st process known");
+			this._autoAttachToLastKnownCheckBox.UseVisualStyleBackColor = true;
+			this._autoAttachToLastKnownCheckBox.CheckedChanged += new System.EventHandler(this._autoAttachToLastKnownCheckBox_CheckedChanged);
+			// 
 			// _forceExitSizeMoveCheckBox
 			// 
 			this._forceExitSizeMoveCheckBox.AutoSize = true;
@@ -675,9 +733,9 @@
 			this._forceExitSizeMoveCheckBox.Size = new System.Drawing.Size(255, 18);
 			this._forceExitSizeMoveCheckBox.TabIndex = 2;
 			this._forceExitSizeMoveCheckBox.Text = "Force EXITSIZEMOVE after window resize";
-			this.toolTip1.SetToolTip(this._forceExitSizeMoveCheckBox, "Check this checkbox if the game stretches the viewport after window resizing inst" +
-        "ead of resizing the viewport. Sometimes required for Frostbyte games like Dragon" +
-        " Age:Inquisition");
+			this.toolTip1.SetToolTip(this._forceExitSizeMoveCheckBox, "Check this checkbox if, after window resizing, the game stretches the viewport in" +
+        "stead of resizing it (so it\'s pixelated). Sometimes required for Frostbyte games" +
+        " like Dragon Age:Inquisition");
 			this._forceExitSizeMoveCheckBox.UseVisualStyleBackColor = true;
 			this._forceExitSizeMoveCheckBox.CheckedChanged += new System.EventHandler(this._forceExitSizeMoveCheckBox_CheckedChanged);
 			// 
@@ -901,66 +959,8 @@
 			this._aboutLinkLabel.TabIndex = 3;
 			this._aboutLinkLabel.TabStop = true;
 			this._aboutLinkLabel.Text = "[About]";
-			this.toolTip1.SetToolTip(this._aboutLinkLabel, "Visit https://github.com/dtgDTGdtg/SRWE");
+			this.toolTip1.SetToolTip(this._aboutLinkLabel, "Visit SRWE on GitHub: https://github.com/dtgDTGdtg/SRWE");
 			this._aboutLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this._aboutLinkLabel_LinkClicked);
-			// 
-			// _autoAttachToLastKnownCheckBox
-			// 
-			this._autoAttachToLastKnownCheckBox.AutoSize = true;
-			this._autoAttachToLastKnownCheckBox.Location = new System.Drawing.Point(21, 220);
-			this._autoAttachToLastKnownCheckBox.Name = "_autoAttachToLastKnownCheckBox";
-			this._autoAttachToLastKnownCheckBox.Size = new System.Drawing.Size(216, 18);
-			this._autoAttachToLastKnownCheckBox.TabIndex = 3;
-			this._autoAttachToLastKnownCheckBox.Text = "Auto-attach to last known process";
-			this.toolTip1.SetToolTip(this._autoAttachToLastKnownCheckBox, "Check this checkbox if you want SRWE to attach automatically at startup to the la" +
-        "st process known");
-			this._autoAttachToLastKnownCheckBox.UseVisualStyleBackColor = true;
-			this._autoAttachToLastKnownCheckBox.CheckedChanged += new System.EventHandler(this._autoAttachToLastKnownCheckBox_CheckedChanged);
-			// 
-			// TSI_OPEN_PROCESS
-			// 
-			this.TSI_OPEN_PROCESS.Image = global::SRWE.Properties.Resources.Application_EXE;
-			this.TSI_OPEN_PROCESS.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.TSI_OPEN_PROCESS.Name = "TSI_OPEN_PROCESS";
-			this.TSI_OPEN_PROCESS.Size = new System.Drawing.Size(169, 22);
-			this.TSI_OPEN_PROCESS.Text = "&Select running Application";
-			this.TSI_OPEN_PROCESS.Click += new System.EventHandler(this.TSI_OPEN_PROCESS_Click);
-			// 
-			// TSI_REFRESH
-			// 
-			this.TSI_REFRESH.Image = global::SRWE.Properties.Resources.RefreshTree;
-			this.TSI_REFRESH.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.TSI_REFRESH.Name = "TSI_REFRESH";
-			this.TSI_REFRESH.Size = new System.Drawing.Size(147, 22);
-			this.TSI_REFRESH.Text = "&Refresh Window Tree";
-			this.TSI_REFRESH.Click += new System.EventHandler(this.TSI_REFRESH_Click);
-			this.TSI_REFRESH.EnabledChanged += new System.EventHandler(this.TSI_REFRESH_EnabledChanged);
-			// 
-			// TSI_PROFILE_LOAD
-			// 
-			this.TSI_PROFILE_LOAD.Image = global::SRWE.Properties.Resources.LoadProfile;
-			this.TSI_PROFILE_LOAD.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.TSI_PROFILE_LOAD.Name = "TSI_PROFILE_LOAD";
-			this.TSI_PROFILE_LOAD.Size = new System.Drawing.Size(90, 22);
-			this.TSI_PROFILE_LOAD.Text = "&Load Profile";
-			this.TSI_PROFILE_LOAD.Click += new System.EventHandler(this.TSI_PROFILE_LOAD_Click);
-			// 
-			// TSI_PROFILE_SAVE
-			// 
-			this.TSI_PROFILE_SAVE.Image = global::SRWE.Properties.Resources.SaveProfile;
-			this.TSI_PROFILE_SAVE.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.TSI_PROFILE_SAVE.Name = "TSI_PROFILE_SAVE";
-			this.TSI_PROFILE_SAVE.Size = new System.Drawing.Size(90, 22);
-			this.TSI_PROFILE_SAVE.Text = "&Save Profile";
-			this.TSI_PROFILE_SAVE.Click += new System.EventHandler(this.TSI_PROFILE_SAVE_Click);
-			// 
-			// TSI_PROFILE_RECENT
-			// 
-			this.TSI_PROFILE_RECENT.Image = global::SRWE.Properties.Resources.Recent;
-			this.TSI_PROFILE_RECENT.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.TSI_PROFILE_RECENT.Name = "TSI_PROFILE_RECENT";
-			this.TSI_PROFILE_RECENT.Size = new System.Drawing.Size(117, 22);
-			this.TSI_PROFILE_RECENT.Text = "Recent &Profiles";
 			// 
 			// MainForm
 			// 
