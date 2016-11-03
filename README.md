@@ -55,6 +55,7 @@ It's of course tedious to type in a resolution each time, clicking borders off/o
 current state of SRWE as a _Profile_. To do this, simply click _Save Profile_. Any saved profile will be added to the list of 
 _Recent profiles_, so you can quickly pick a profile from that list instead of typing the resolution in again. To get started, 
 you can choose any of [the profiles in the SRWE repository](https://github.com/dtgDTGdtg/SRWE/tree/master/Profiles), and load these with
-the _Load Profile_ button after you've downloaded them and stored them in a folder. They're just examples: if you want to have different
+the _Load Profile_ button after you've downloaded them and stored them in a folder. Download the profiles from the 
+[Releases](https://github.com/dtgDTGdtg/SRWE/releases) tab on GitHub in the `SRWE-Example-Profiles.zip` file. They're just examples: if you want to have different
 resolutions, just load one of them, alter the resolution and save it under a different name. 
 
