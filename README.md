@@ -46,9 +46,14 @@ games, this is enough. For other games this isn't enough, they deliberately wait
 called `WM_EXITSIZEMOVE`, and you can tell SRWE to send this message as well, by checking the _Force EXITSIZEMOVE after window resize_ 
 checkbox. 
 
-Some games, like Dragon Age:Inquisition and Skyrim SE, it's required to check this checkbox. For others, like Rise of the Tomb Raider, 
+Some games, like Dragon Age:Inquisition, it's required to check this checkbox. For others, like Rise of the Tomb Raider, 
 checking this checkbox actually causes resizing the window through SRWE to be stretching. It's therefore a trial/error process whether
-to check this checkbox or not. But it's easy to find out, and SRWE will remember the state of the checkbox. 
+to check this checkbox or not. But it's easy to find out (just try whether checking the checkbox helps solve it or not), and SRWE will remember 
+the state of the checkbox. 
+
+Remember, not all games support hotsampling. SRWE isn't a piece of magic that can enable functionality in a game that's not implemented by its developers:
+it simply mimics a user's resize actions on a windowed game. If the game itself doesn't anticipate on resize actions (most games ignore any resize action
+on the window, sadly) then SRWE can't add that functionality, only the game developers can.
 
 ## Profiles
 It's of course tedious to type in a resolution each time, clicking borders off/on, etc. To solve that, SRWE allows you to save the
