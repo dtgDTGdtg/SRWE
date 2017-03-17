@@ -145,7 +145,10 @@ namespace SRWE
 			else
 			{
 				XmlNode xmlRecentProfiles = s_xmlSettings.DocumentElement["RecentProfiles"];
-				if (xmlRecentProfiles.ChildNodes.Count > 9) xmlRecentProfiles.RemoveChild(xmlRecentProfiles.ChildNodes[xmlRecentProfiles.ChildNodes.Count - 1]);
+				if(xmlRecentProfiles.ChildNodes.Count > 19)
+				{
+					xmlRecentProfiles.RemoveChild(xmlRecentProfiles.ChildNodes[xmlRecentProfiles.ChildNodes.Count - 1]);
+				}
 
 				xmlProfile = s_xmlSettings.CreateElement("Profile");
 				xmlProfile.Attributes.Append(s_xmlSettings.CreateAttribute("FilePath")).Value = filepath;
