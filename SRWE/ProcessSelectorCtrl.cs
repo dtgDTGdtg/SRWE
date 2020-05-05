@@ -82,9 +82,9 @@ namespace SRWE
 							m_dtProcessList.Rows.Add(row);
 					}
 				}
-				catch (Win32Exception ex)
+				catch
                 {
-                    if ((uint)ex.ErrorCode != 0x80004005) throw;
+					// exception can be caused by anything, e.g. lack of access rights. Ignore process. 
                 }
 			}
 			if (DGV_PROCESS_LIST.RowCount > 0)
