@@ -106,6 +106,7 @@
 			this.TIMER_HOTKEYS = new System.Windows.Forms.Timer(this.components);
 			this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
 			this._aboutLinkLabel = new System.Windows.Forms.LinkLabel();
+			this._setWindowPositionAndSizeButton = new System.Windows.Forms.Button();
 			groupBox2 = new System.Windows.Forms.GroupBox();
 			groupBox3 = new System.Windows.Forms.GroupBox();
 			label16 = new System.Windows.Forms.Label();
@@ -146,7 +147,7 @@
 			groupBox2.Controls.Add(this.BTN_ALIGN_TOP);
 			groupBox2.Controls.Add(this.BTN_ALIGN_HCENTER);
 			groupBox2.Controls.Add(this.BTN_ALIGN_LEFT);
-			groupBox2.Location = new System.Drawing.Point(6, 96);
+			groupBox2.Location = new System.Drawing.Point(6, 105);
 			groupBox2.Name = "groupBox2";
 			groupBox2.Size = new System.Drawing.Size(282, 87);
 			groupBox2.TabIndex = 1;
@@ -240,9 +241,9 @@
 			groupBox3.Controls.Add(this.EDT_TEXT);
 			groupBox3.Controls.Add(this.EDT_CLASS);
 			groupBox3.Controls.Add(this.EDT_HANDLE);
-			groupBox3.Location = new System.Drawing.Point(294, 6);
+			groupBox3.Location = new System.Drawing.Point(294, 8);
 			groupBox3.Name = "groupBox3";
-			groupBox3.Size = new System.Drawing.Size(310, 358);
+			groupBox3.Size = new System.Drawing.Size(310, 367);
 			groupBox3.TabIndex = 7;
 			groupBox3.TabStop = false;
 			groupBox3.Text = "Window Info";
@@ -489,6 +490,7 @@
 			// 
 			// groupBox1
 			// 
+			groupBox1.Controls.Add(this._setWindowPositionAndSizeButton);
 			groupBox1.Controls.Add(this.EDT_WINRC_Y);
 			groupBox1.Controls.Add(this.EDT_WINRC_HEIGHT);
 			groupBox1.Controls.Add(this.EDT_WINRC_WIDTH);
@@ -497,16 +499,16 @@
 			groupBox1.Controls.Add(label4);
 			groupBox1.Controls.Add(label3);
 			groupBox1.Controls.Add(label2);
-			groupBox1.Location = new System.Drawing.Point(6, 6);
+			groupBox1.Location = new System.Drawing.Point(6, 8);
 			groupBox1.Name = "groupBox1";
-			groupBox1.Size = new System.Drawing.Size(282, 84);
+			groupBox1.Size = new System.Drawing.Size(282, 91);
 			groupBox1.TabIndex = 0;
 			groupBox1.TabStop = false;
 			groupBox1.Text = "Window position and size:";
 			// 
 			// EDT_WINRC_Y
 			// 
-			this.EDT_WINRC_Y.Location = new System.Drawing.Point(31, 51);
+			this.EDT_WINRC_Y.Location = new System.Drawing.Point(31, 59);
 			this.EDT_WINRC_Y.MaxLength = 6;
 			this.EDT_WINRC_Y.Name = "EDT_WINRC_Y";
 			this.EDT_WINRC_Y.Size = new System.Drawing.Size(80, 22);
@@ -516,7 +518,7 @@
 			// 
 			// EDT_WINRC_HEIGHT
 			// 
-			this.EDT_WINRC_HEIGHT.Location = new System.Drawing.Point(186, 51);
+			this.EDT_WINRC_HEIGHT.Location = new System.Drawing.Point(186, 59);
 			this.EDT_WINRC_HEIGHT.MaxLength = 6;
 			this.EDT_WINRC_HEIGHT.Name = "EDT_WINRC_HEIGHT";
 			this.EDT_WINRC_HEIGHT.Size = new System.Drawing.Size(80, 22);
@@ -526,7 +528,7 @@
 			// 
 			// EDT_WINRC_WIDTH
 			// 
-			this.EDT_WINRC_WIDTH.Location = new System.Drawing.Point(186, 21);
+			this.EDT_WINRC_WIDTH.Location = new System.Drawing.Point(186, 29);
 			this.EDT_WINRC_WIDTH.MaxLength = 6;
 			this.EDT_WINRC_WIDTH.Name = "EDT_WINRC_WIDTH";
 			this.EDT_WINRC_WIDTH.Size = new System.Drawing.Size(80, 22);
@@ -536,7 +538,7 @@
 			// 
 			// EDT_WINRC_X
 			// 
-			this.EDT_WINRC_X.Location = new System.Drawing.Point(31, 21);
+			this.EDT_WINRC_X.Location = new System.Drawing.Point(31, 29);
 			this.EDT_WINRC_X.MaxLength = 6;
 			this.EDT_WINRC_X.Name = "EDT_WINRC_X";
 			this.EDT_WINRC_X.Size = new System.Drawing.Size(80, 22);
@@ -547,7 +549,7 @@
 			// label5
 			// 
 			label5.AutoSize = true;
-			label5.Location = new System.Drawing.Point(133, 54);
+			label5.Location = new System.Drawing.Point(133, 62);
 			label5.Name = "label5";
 			label5.Size = new System.Drawing.Size(47, 14);
 			label5.TabIndex = 0;
@@ -556,7 +558,7 @@
 			// label4
 			// 
 			label4.AutoSize = true;
-			label4.Location = new System.Drawing.Point(136, 24);
+			label4.Location = new System.Drawing.Point(136, 32);
 			label4.Name = "label4";
 			label4.Size = new System.Drawing.Size(44, 14);
 			label4.TabIndex = 0;
@@ -565,7 +567,7 @@
 			// label3
 			// 
 			label3.AutoSize = true;
-			label3.Location = new System.Drawing.Point(6, 54);
+			label3.Location = new System.Drawing.Point(6, 62);
 			label3.Name = "label3";
 			label3.Size = new System.Drawing.Size(19, 14);
 			label3.TabIndex = 0;
@@ -574,7 +576,7 @@
 			// label2
 			// 
 			label2.AutoSize = true;
-			label2.Location = new System.Drawing.Point(6, 24);
+			label2.Location = new System.Drawing.Point(6, 32);
 			label2.Name = "label2";
 			label2.Size = new System.Drawing.Size(18, 14);
 			label2.TabIndex = 0;
@@ -715,7 +717,7 @@
 			// _autoAttachToLastKnownCheckBox
 			// 
 			this._autoAttachToLastKnownCheckBox.AutoSize = true;
-			this._autoAttachToLastKnownCheckBox.Location = new System.Drawing.Point(21, 220);
+			this._autoAttachToLastKnownCheckBox.Location = new System.Drawing.Point(21, 228);
 			this._autoAttachToLastKnownCheckBox.Name = "_autoAttachToLastKnownCheckBox";
 			this._autoAttachToLastKnownCheckBox.Size = new System.Drawing.Size(216, 18);
 			this._autoAttachToLastKnownCheckBox.TabIndex = 3;
@@ -728,7 +730,7 @@
 			// _forceExitSizeMoveCheckBox
 			// 
 			this._forceExitSizeMoveCheckBox.AutoSize = true;
-			this._forceExitSizeMoveCheckBox.Location = new System.Drawing.Point(21, 196);
+			this._forceExitSizeMoveCheckBox.Location = new System.Drawing.Point(21, 204);
 			this._forceExitSizeMoveCheckBox.Name = "_forceExitSizeMoveCheckBox";
 			this._forceExitSizeMoveCheckBox.Size = new System.Drawing.Size(255, 18);
 			this._forceExitSizeMoveCheckBox.TabIndex = 2;
@@ -779,10 +781,10 @@
 			this.TABPG_STYLES.Controls.Add(this.DGV_WS);
 			this.TABPG_STYLES.Controls.Add(label13);
 			this.TABPG_STYLES.Controls.Add(label12);
-			this.TABPG_STYLES.Location = new System.Drawing.Point(4, 22);
+			this.TABPG_STYLES.Location = new System.Drawing.Point(4, 23);
 			this.TABPG_STYLES.Name = "TABPG_STYLES";
 			this.TABPG_STYLES.Padding = new System.Windows.Forms.Padding(3);
-			this.TABPG_STYLES.Size = new System.Drawing.Size(610, 382);
+			this.TABPG_STYLES.Size = new System.Drawing.Size(607, 381);
 			this.TABPG_STYLES.TabIndex = 2;
 			this.TABPG_STYLES.Text = "Window Styles";
 			this.TABPG_STYLES.UseVisualStyleBackColor = true;
@@ -962,6 +964,16 @@
 			this.toolTip1.SetToolTip(this._aboutLinkLabel, "Visit SRWE on GitHub: https://github.com/dtgDTGdtg/SRWE");
 			this._aboutLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this._aboutLinkLabel_LinkClicked);
 			// 
+			// _setWindowPositionAndSizeButton
+			// 
+			this._setWindowPositionAndSizeButton.Location = new System.Drawing.Point(224, 0);
+			this._setWindowPositionAndSizeButton.Name = "_setWindowPositionAndSizeButton";
+			this._setWindowPositionAndSizeButton.Size = new System.Drawing.Size(43, 23);
+			this._setWindowPositionAndSizeButton.TabIndex = 4;
+			this._setWindowPositionAndSizeButton.Text = "Set";
+			this._setWindowPositionAndSizeButton.UseVisualStyleBackColor = true;
+			this._setWindowPositionAndSizeButton.Click += new System.EventHandler(this._setWindowPositionAndSizeButton_Click);
+			// 
 			// MainForm
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1053,5 +1065,6 @@
 		private System.Windows.Forms.ToolTip toolTip1;
 		private System.Windows.Forms.LinkLabel _aboutLinkLabel;
 		private System.Windows.Forms.CheckBox _autoAttachToLastKnownCheckBox;
+		private System.Windows.Forms.Button _setWindowPositionAndSizeButton;
 	}
 }

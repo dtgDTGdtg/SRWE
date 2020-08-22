@@ -127,8 +127,6 @@ namespace SRWE
 
 			UpdateGUI(true);
 
-			if ((m_states & States.UpdateWindowRect) != 0)
-				UpdateWindowRect();
 			if ((m_states & States.UpdateWindowStyle) != 0)
 				UpdateWindowStyles(false);
 			if ((m_states & States.UpdateWindowExStyle) != 0)
@@ -916,6 +914,11 @@ namespace SRWE
 					// folder name is wrong, nothing we can do, silently skip it. 
 				}
 			}
+		}
+
+		private void _setWindowPositionAndSizeButton_Click(object sender, EventArgs e)
+		{
+			UpdateWindowRect();
 		}
 	}
 }
