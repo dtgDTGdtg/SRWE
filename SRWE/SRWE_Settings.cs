@@ -329,6 +329,14 @@ namespace SRWE
 			return nDefValue;
 		}
 
+		public static float SAFE_String_2_Float(string value)
+        {
+			float result;
+			if (float.TryParse(value, out result))
+				return result;
+			return 1f;
+        }
+
 		public static int SAFE_HexString_2_Int(string hexString, int nDefValue)
 		{
 			int nResult;
@@ -362,7 +370,18 @@ namespace SRWE
 
             return "";
         }
-	}
+
+        internal static float SAFE_ParseRatio(string text)
+        {
+			string[] ratios = text.Split(':');
+			float w, h;
+			if (!float.TryParse(ratios[0], out w))
+				return 1f;
+			if (!float.TryParse(ratios[1], out h))
+				return 1f;
+			return w / h;
+        }
+    }
 
     /// <summary>
     /// SRWE_HotKey class.

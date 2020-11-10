@@ -44,12 +44,15 @@
 			System.Windows.Forms.Label label10;
 			System.Windows.Forms.Label label9;
 			System.Windows.Forms.GroupBox groupBox1;
+			System.Windows.Forms.Label label19;
 			System.Windows.Forms.Label label5;
 			System.Windows.Forms.Label label4;
 			System.Windows.Forms.Label label3;
 			System.Windows.Forms.Label label2;
 			System.Windows.Forms.Label label13;
 			System.Windows.Forms.Label label12;
+			System.Windows.Forms.GroupBox groupBox4;
+			System.Windows.Forms.Label label23;
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
@@ -70,10 +73,17 @@
 			this.EDT_TEXT = new System.Windows.Forms.TextBox();
 			this.EDT_CLASS = new System.Windows.Forms.TextBox();
 			this.EDT_HANDLE = new System.Windows.Forms.TextBox();
+			this.EDT_WINRC_SCALE = new System.Windows.Forms.TextBox();
+			this._setWindowPositionAndSizeButton = new System.Windows.Forms.Button();
 			this.EDT_WINRC_Y = new System.Windows.Forms.TextBox();
 			this.EDT_WINRC_HEIGHT = new System.Windows.Forms.TextBox();
 			this.EDT_WINRC_WIDTH = new System.Windows.Forms.TextBox();
 			this.EDT_WINRC_X = new System.Windows.Forms.TextBox();
+			this.label20 = new System.Windows.Forms.Label();
+			this.EDT_OUTPUT_RESOLUTION = new System.Windows.Forms.TextBox();
+			this.EDT_WINRC_ASPRAT = new System.Windows.Forms.ComboBox();
+			this._setWindowResolutionFromMegapixels = new System.Windows.Forms.Button();
+			this.EDT_WINRC_MPX = new System.Windows.Forms.TextBox();
 			this.TS_MAIN = new System.Windows.Forms.ToolStrip();
 			this.TSI_OPEN_PROCESS = new System.Windows.Forms.ToolStripButton();
 			this.TSI_REFRESH = new System.Windows.Forms.ToolStripButton();
@@ -106,7 +116,6 @@
 			this.TIMER_HOTKEYS = new System.Windows.Forms.Timer(this.components);
 			this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
 			this._aboutLinkLabel = new System.Windows.Forms.LinkLabel();
-			this._setWindowPositionAndSizeButton = new System.Windows.Forms.Button();
 			groupBox2 = new System.Windows.Forms.GroupBox();
 			groupBox3 = new System.Windows.Forms.GroupBox();
 			label16 = new System.Windows.Forms.Label();
@@ -122,15 +131,19 @@
 			label10 = new System.Windows.Forms.Label();
 			label9 = new System.Windows.Forms.Label();
 			groupBox1 = new System.Windows.Forms.GroupBox();
+			label19 = new System.Windows.Forms.Label();
 			label5 = new System.Windows.Forms.Label();
 			label4 = new System.Windows.Forms.Label();
 			label3 = new System.Windows.Forms.Label();
 			label2 = new System.Windows.Forms.Label();
 			label13 = new System.Windows.Forms.Label();
 			label12 = new System.Windows.Forms.Label();
+			groupBox4 = new System.Windows.Forms.GroupBox();
+			label23 = new System.Windows.Forms.Label();
 			groupBox2.SuspendLayout();
 			groupBox3.SuspendLayout();
 			groupBox1.SuspendLayout();
+			groupBox4.SuspendLayout();
 			this.TS_MAIN.SuspendLayout();
 			this.TABCTRL_MAIN.SuspendLayout();
 			this.TABPG_GENERAL.SuspendLayout();
@@ -147,7 +160,7 @@
 			groupBox2.Controls.Add(this.BTN_ALIGN_TOP);
 			groupBox2.Controls.Add(this.BTN_ALIGN_HCENTER);
 			groupBox2.Controls.Add(this.BTN_ALIGN_LEFT);
-			groupBox2.Location = new System.Drawing.Point(6, 105);
+			groupBox2.Location = new System.Drawing.Point(6, 232);
 			groupBox2.Name = "groupBox2";
 			groupBox2.Size = new System.Drawing.Size(282, 87);
 			groupBox2.TabIndex = 1;
@@ -241,9 +254,9 @@
 			groupBox3.Controls.Add(this.EDT_TEXT);
 			groupBox3.Controls.Add(this.EDT_CLASS);
 			groupBox3.Controls.Add(this.EDT_HANDLE);
-			groupBox3.Location = new System.Drawing.Point(294, 8);
+			groupBox3.Location = new System.Drawing.Point(464, 8);
 			groupBox3.Name = "groupBox3";
-			groupBox3.Size = new System.Drawing.Size(310, 367);
+			groupBox3.Size = new System.Drawing.Size(310, 503);
 			groupBox3.TabIndex = 7;
 			groupBox3.TabStop = false;
 			groupBox3.Text = "Window Info";
@@ -490,6 +503,8 @@
 			// 
 			// groupBox1
 			// 
+			groupBox1.Controls.Add(this.EDT_WINRC_SCALE);
+			groupBox1.Controls.Add(label19);
 			groupBox1.Controls.Add(this._setWindowPositionAndSizeButton);
 			groupBox1.Controls.Add(this.EDT_WINRC_Y);
 			groupBox1.Controls.Add(this.EDT_WINRC_HEIGHT);
@@ -501,10 +516,40 @@
 			groupBox1.Controls.Add(label2);
 			groupBox1.Location = new System.Drawing.Point(6, 8);
 			groupBox1.Name = "groupBox1";
-			groupBox1.Size = new System.Drawing.Size(282, 91);
+			groupBox1.Size = new System.Drawing.Size(429, 91);
 			groupBox1.TabIndex = 0;
 			groupBox1.TabStop = false;
 			groupBox1.Text = "Window position and size:";
+			// 
+			// EDT_WINRC_SCALE
+			// 
+			this.EDT_WINRC_SCALE.Location = new System.Drawing.Point(324, 29);
+			this.EDT_WINRC_SCALE.MaxLength = 6;
+			this.EDT_WINRC_SCALE.Name = "EDT_WINRC_SCALE";
+			this.EDT_WINRC_SCALE.Size = new System.Drawing.Size(80, 22);
+			this.EDT_WINRC_SCALE.TabIndex = 6;
+			this.EDT_WINRC_SCALE.Text = "1";
+			this.EDT_WINRC_SCALE.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.EDT_WINRC_SCALE.TextChanged += new System.EventHandler(this.EDT_WINRC_TextChanged);
+			// 
+			// label19
+			// 
+			label19.AutoSize = true;
+			label19.Location = new System.Drawing.Point(279, 32);
+			label19.Name = "label19";
+			label19.Size = new System.Drawing.Size(39, 14);
+			label19.TabIndex = 5;
+			label19.Text = "Scale:";
+			// 
+			// _setWindowPositionAndSizeButton
+			// 
+			this._setWindowPositionAndSizeButton.Location = new System.Drawing.Point(361, 57);
+			this._setWindowPositionAndSizeButton.Name = "_setWindowPositionAndSizeButton";
+			this._setWindowPositionAndSizeButton.Size = new System.Drawing.Size(43, 23);
+			this._setWindowPositionAndSizeButton.TabIndex = 4;
+			this._setWindowPositionAndSizeButton.Text = "Set";
+			this._setWindowPositionAndSizeButton.UseVisualStyleBackColor = true;
+			this._setWindowPositionAndSizeButton.Click += new System.EventHandler(this._setWindowPositionAndSizeButton_Click);
 			// 
 			// EDT_WINRC_Y
 			// 
@@ -603,6 +648,84 @@
 			label12.TabIndex = 0;
 			label12.Text = "Window Styles:";
 			// 
+			// groupBox4
+			// 
+			groupBox4.Controls.Add(this.label20);
+			groupBox4.Controls.Add(this.EDT_OUTPUT_RESOLUTION);
+			groupBox4.Controls.Add(this.EDT_WINRC_ASPRAT);
+			groupBox4.Controls.Add(this._setWindowResolutionFromMegapixels);
+			groupBox4.Controls.Add(this.EDT_WINRC_MPX);
+			groupBox4.Controls.Add(label23);
+			groupBox4.Location = new System.Drawing.Point(6, 116);
+			groupBox4.Name = "groupBox4";
+			groupBox4.Size = new System.Drawing.Size(429, 91);
+			groupBox4.TabIndex = 0;
+			groupBox4.TabStop = false;
+			groupBox4.Text = "Window scaling from megapixels";
+			// 
+			// label20
+			// 
+			this.label20.AutoSize = true;
+			this.label20.Location = new System.Drawing.Point(177, 30);
+			this.label20.Name = "label20";
+			this.label20.Size = new System.Drawing.Size(111, 14);
+			this.label20.TabIndex = 10;
+			this.label20.Text = "Output Resolution:";
+			// 
+			// EDT_OUTPUT_RESOLUTION
+			// 
+			this.EDT_OUTPUT_RESOLUTION.Location = new System.Drawing.Point(294, 25);
+			this.EDT_OUTPUT_RESOLUTION.Name = "EDT_OUTPUT_RESOLUTION";
+			this.EDT_OUTPUT_RESOLUTION.ReadOnly = true;
+			this.EDT_OUTPUT_RESOLUTION.Size = new System.Drawing.Size(110, 22);
+			this.EDT_OUTPUT_RESOLUTION.TabIndex = 9;
+			// 
+			// EDT_WINRC_ASPRAT
+			// 
+			this.EDT_WINRC_ASPRAT.FormattingEnabled = true;
+			this.EDT_WINRC_ASPRAT.Items.AddRange(new object[] {
+			"1:1",
+			"16:10",
+			"16:9",
+			"21:9",
+			"4:5"});
+			this.EDT_WINRC_ASPRAT.Location = new System.Drawing.Point(77, 27);
+			this.EDT_WINRC_ASPRAT.Name = "EDT_WINRC_ASPRAT";
+			this.EDT_WINRC_ASPRAT.Size = new System.Drawing.Size(80, 22);
+			this.EDT_WINRC_ASPRAT.Sorted = true;
+			this.EDT_WINRC_ASPRAT.TabIndex = 8;
+			this.EDT_WINRC_ASPRAT.Text = "1:1";
+			// 
+			// _setWindowResolutionFromMegapixels
+			// 
+			this._setWindowResolutionFromMegapixels.Location = new System.Drawing.Point(361, 57);
+			this._setWindowResolutionFromMegapixels.Name = "_setWindowResolutionFromMegapixels";
+			this._setWindowResolutionFromMegapixels.Size = new System.Drawing.Size(43, 23);
+			this._setWindowResolutionFromMegapixels.TabIndex = 4;
+			this._setWindowResolutionFromMegapixels.Text = "Set";
+			this._setWindowResolutionFromMegapixels.UseVisualStyleBackColor = true;
+			this._setWindowResolutionFromMegapixels.Click += new System.EventHandler(this._setWindowResolutionFromMegapixels_Click);
+			// 
+			// EDT_WINRC_MPX
+			// 
+			this.EDT_WINRC_MPX.Location = new System.Drawing.Point(77, 58);
+			this.EDT_WINRC_MPX.MaxLength = 6;
+			this.EDT_WINRC_MPX.Name = "EDT_WINRC_MPX";
+			this.EDT_WINRC_MPX.Size = new System.Drawing.Size(80, 22);
+			this.EDT_WINRC_MPX.TabIndex = 3;
+			this.EDT_WINRC_MPX.Text = "3";
+			this.EDT_WINRC_MPX.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+			this.EDT_WINRC_MPX.TextChanged += new System.EventHandler(this.EDT_WINRC_TextChanged);
+			// 
+			// label23
+			// 
+			label23.AutoSize = true;
+			label23.Location = new System.Drawing.Point(6, 62);
+			label23.Name = "label23";
+			label23.Size = new System.Drawing.Size(69, 14);
+			label23.TabIndex = 0;
+			label23.Text = "Megapixels:";
+			// 
 			// TS_MAIN
 			// 
 			this.TS_MAIN.Font = new System.Drawing.Font("Tahoma", 9F);
@@ -615,7 +738,7 @@
             this.TSI_PROFILE_RECENT});
 			this.TS_MAIN.Location = new System.Drawing.Point(0, 0);
 			this.TS_MAIN.Name = "TS_MAIN";
-			this.TS_MAIN.Size = new System.Drawing.Size(912, 25);
+			this.TS_MAIN.Size = new System.Drawing.Size(1082, 25);
 			this.TS_MAIN.TabIndex = 0;
 			this.TS_MAIN.Text = "Main Toolbar";
 			// 
@@ -677,7 +800,7 @@
 			this.TV_WINDOW_TREE.HideSelection = false;
 			this.TV_WINDOW_TREE.Location = new System.Drawing.Point(12, 28);
 			this.TV_WINDOW_TREE.Name = "TV_WINDOW_TREE";
-			this.TV_WINDOW_TREE.Size = new System.Drawing.Size(264, 427);
+			this.TV_WINDOW_TREE.Size = new System.Drawing.Size(264, 564);
 			this.TV_WINDOW_TREE.TabIndex = 1;
 			this.TV_WINDOW_TREE.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.TV_WINDOW_TREE_AfterCheck);
 			this.TV_WINDOW_TREE.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TV_WINDOW_TREE_AfterSelect);
@@ -692,7 +815,7 @@
 			this.TABCTRL_MAIN.Location = new System.Drawing.Point(282, 28);
 			this.TABCTRL_MAIN.Name = "TABCTRL_MAIN";
 			this.TABCTRL_MAIN.SelectedIndex = 0;
-			this.TABCTRL_MAIN.Size = new System.Drawing.Size(618, 408);
+			this.TABCTRL_MAIN.Size = new System.Drawing.Size(788, 545);
 			this.TABCTRL_MAIN.TabIndex = 2;
 			this.TABCTRL_MAIN.SelectedIndexChanged += new System.EventHandler(this.TABCTRL_MAIN_SelectedIndexChanged);
 			// 
@@ -705,11 +828,12 @@
 			this.TABPG_GENERAL.Controls.Add(this.BTN_TASKBAR_MODE);
 			this.TABPG_GENERAL.Controls.Add(this.BTN_FAKE_FULLSCREEN);
 			this.TABPG_GENERAL.Controls.Add(this.BTN_REM_BORDERS);
+			this.TABPG_GENERAL.Controls.Add(groupBox4);
 			this.TABPG_GENERAL.Controls.Add(groupBox1);
 			this.TABPG_GENERAL.Location = new System.Drawing.Point(4, 23);
 			this.TABPG_GENERAL.Name = "TABPG_GENERAL";
 			this.TABPG_GENERAL.Padding = new System.Windows.Forms.Padding(3);
-			this.TABPG_GENERAL.Size = new System.Drawing.Size(610, 381);
+			this.TABPG_GENERAL.Size = new System.Drawing.Size(780, 518);
 			this.TABPG_GENERAL.TabIndex = 0;
 			this.TABPG_GENERAL.Text = "General";
 			this.TABPG_GENERAL.UseVisualStyleBackColor = true;
@@ -717,7 +841,7 @@
 			// _autoAttachToLastKnownCheckBox
 			// 
 			this._autoAttachToLastKnownCheckBox.AutoSize = true;
-			this._autoAttachToLastKnownCheckBox.Location = new System.Drawing.Point(21, 228);
+			this._autoAttachToLastKnownCheckBox.Location = new System.Drawing.Point(21, 372);
 			this._autoAttachToLastKnownCheckBox.Name = "_autoAttachToLastKnownCheckBox";
 			this._autoAttachToLastKnownCheckBox.Size = new System.Drawing.Size(216, 18);
 			this._autoAttachToLastKnownCheckBox.TabIndex = 3;
@@ -730,7 +854,7 @@
 			// _forceExitSizeMoveCheckBox
 			// 
 			this._forceExitSizeMoveCheckBox.AutoSize = true;
-			this._forceExitSizeMoveCheckBox.Location = new System.Drawing.Point(21, 204);
+			this._forceExitSizeMoveCheckBox.Location = new System.Drawing.Point(21, 348);
 			this._forceExitSizeMoveCheckBox.Name = "_forceExitSizeMoveCheckBox";
 			this._forceExitSizeMoveCheckBox.Size = new System.Drawing.Size(255, 18);
 			this._forceExitSizeMoveCheckBox.TabIndex = 2;
@@ -743,7 +867,7 @@
 			// 
 			// BTN_TASKBAR_MODE
 			// 
-			this.BTN_TASKBAR_MODE.Location = new System.Drawing.Point(67, 326);
+			this.BTN_TASKBAR_MODE.Location = new System.Drawing.Point(67, 470);
 			this.BTN_TASKBAR_MODE.Name = "BTN_TASKBAR_MODE";
 			this.BTN_TASKBAR_MODE.Size = new System.Drawing.Size(160, 25);
 			this.BTN_TASKBAR_MODE.TabIndex = 6;
@@ -753,7 +877,7 @@
 			// 
 			// BTN_FAKE_FULLSCREEN
 			// 
-			this.BTN_FAKE_FULLSCREEN.Location = new System.Drawing.Point(67, 295);
+			this.BTN_FAKE_FULLSCREEN.Location = new System.Drawing.Point(67, 439);
 			this.BTN_FAKE_FULLSCREEN.Name = "BTN_FAKE_FULLSCREEN";
 			this.BTN_FAKE_FULLSCREEN.Size = new System.Drawing.Size(160, 25);
 			this.BTN_FAKE_FULLSCREEN.TabIndex = 5;
@@ -763,7 +887,7 @@
 			// 
 			// BTN_REM_BORDERS
 			// 
-			this.BTN_REM_BORDERS.Location = new System.Drawing.Point(67, 264);
+			this.BTN_REM_BORDERS.Location = new System.Drawing.Point(67, 408);
 			this.BTN_REM_BORDERS.Name = "BTN_REM_BORDERS";
 			this.BTN_REM_BORDERS.Size = new System.Drawing.Size(160, 25);
 			this.BTN_REM_BORDERS.TabIndex = 4;
@@ -781,10 +905,10 @@
 			this.TABPG_STYLES.Controls.Add(this.DGV_WS);
 			this.TABPG_STYLES.Controls.Add(label13);
 			this.TABPG_STYLES.Controls.Add(label12);
-			this.TABPG_STYLES.Location = new System.Drawing.Point(4, 23);
+			this.TABPG_STYLES.Location = new System.Drawing.Point(4, 22);
 			this.TABPG_STYLES.Name = "TABPG_STYLES";
 			this.TABPG_STYLES.Padding = new System.Windows.Forms.Padding(3);
-			this.TABPG_STYLES.Size = new System.Drawing.Size(607, 381);
+			this.TABPG_STYLES.Size = new System.Drawing.Size(610, 382);
 			this.TABPG_STYLES.TabIndex = 2;
 			this.TABPG_STYLES.Text = "Window Styles";
 			this.TABPG_STYLES.UseVisualStyleBackColor = true;
@@ -955,7 +1079,7 @@
 			// 
 			this._aboutLinkLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this._aboutLinkLabel.AutoSize = true;
-			this._aboutLinkLabel.Location = new System.Drawing.Point(282, 439);
+			this._aboutLinkLabel.Location = new System.Drawing.Point(282, 576);
 			this._aboutLinkLabel.Name = "_aboutLinkLabel";
 			this._aboutLinkLabel.Size = new System.Drawing.Size(51, 14);
 			this._aboutLinkLabel.TabIndex = 3;
@@ -964,20 +1088,10 @@
 			this.toolTip1.SetToolTip(this._aboutLinkLabel, "Visit SRWE on GitHub: https://github.com/dtgDTGdtg/SRWE");
 			this._aboutLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this._aboutLinkLabel_LinkClicked);
 			// 
-			// _setWindowPositionAndSizeButton
-			// 
-			this._setWindowPositionAndSizeButton.Location = new System.Drawing.Point(224, 0);
-			this._setWindowPositionAndSizeButton.Name = "_setWindowPositionAndSizeButton";
-			this._setWindowPositionAndSizeButton.Size = new System.Drawing.Size(43, 23);
-			this._setWindowPositionAndSizeButton.TabIndex = 4;
-			this._setWindowPositionAndSizeButton.Text = "Set";
-			this._setWindowPositionAndSizeButton.UseVisualStyleBackColor = true;
-			this._setWindowPositionAndSizeButton.Click += new System.EventHandler(this._setWindowPositionAndSizeButton_Click);
-			// 
 			// MainForm
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-			this.ClientSize = new System.Drawing.Size(912, 467);
+			this.ClientSize = new System.Drawing.Size(1082, 604);
 			this.Controls.Add(this._aboutLinkLabel);
 			this.Controls.Add(this.TABCTRL_MAIN);
 			this.Controls.Add(this.TV_WINDOW_TREE);
@@ -996,6 +1110,8 @@
 			groupBox3.PerformLayout();
 			groupBox1.ResumeLayout(false);
 			groupBox1.PerformLayout();
+			groupBox4.ResumeLayout(false);
+			groupBox4.PerformLayout();
 			this.TS_MAIN.ResumeLayout(false);
 			this.TS_MAIN.PerformLayout();
 			this.TABCTRL_MAIN.ResumeLayout(false);
@@ -1060,11 +1176,17 @@
 		private System.Windows.Forms.Timer TIMER_MAIN;
 		private System.Windows.Forms.OpenFileDialog OFD_PROFILE;
 		private System.Windows.Forms.SaveFileDialog SFD_PROFILE;
-        private System.Windows.Forms.Timer TIMER_HOTKEYS;
+		private System.Windows.Forms.Timer TIMER_HOTKEYS;
 		private System.Windows.Forms.CheckBox _forceExitSizeMoveCheckBox;
 		private System.Windows.Forms.ToolTip toolTip1;
 		private System.Windows.Forms.LinkLabel _aboutLinkLabel;
 		private System.Windows.Forms.CheckBox _autoAttachToLastKnownCheckBox;
 		private System.Windows.Forms.Button _setWindowPositionAndSizeButton;
+		private System.Windows.Forms.TextBox EDT_WINRC_SCALE;
+		private System.Windows.Forms.Button _setWindowResolutionFromMegapixels;
+		private System.Windows.Forms.TextBox EDT_WINRC_MPX;
+		private System.Windows.Forms.ComboBox EDT_WINRC_ASPRAT;
+		private System.Windows.Forms.Label label20;
+		private System.Windows.Forms.TextBox EDT_OUTPUT_RESOLUTION;
 	}
 }

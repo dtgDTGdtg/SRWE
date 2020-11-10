@@ -286,7 +286,9 @@ namespace SRWE
 			}
 		}
 
-		public uint Style
+		public float Scale = 1f;
+
+        public uint Style
 		{
 			get { return m_windowInfo.dwStyle; }
 			set
@@ -380,7 +382,7 @@ namespace SRWE
 			get { return m_nThreadID; }
 		}
 
-		private static void MakeRectRelative(RECT rcParent, ref RECT rcDest)
+        private static void MakeRectRelative(RECT rcParent, ref RECT rcDest)
 		{
 			rcDest.left = rcDest.left - rcParent.left;
 			rcDest.top = rcDest.top - rcParent.top;
