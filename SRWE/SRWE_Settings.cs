@@ -375,10 +375,18 @@ namespace SRWE
         {
 			string[] ratios = text.Split(':');
 			float w, h;
+
+			if (ratios.Length != 2)
+				return 1f;
+
 			if (!float.TryParse(ratios[0], out w))
 				return 1f;
 			if (!float.TryParse(ratios[1], out h))
 				return 1f;
+
+			if (w <= 0 || h <= 0)
+				return 1f;
+
 			return w / h;
         }
     }
