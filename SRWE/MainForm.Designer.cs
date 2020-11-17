@@ -256,7 +256,7 @@
 			groupBox3.Controls.Add(this.EDT_HANDLE);
 			groupBox3.Location = new System.Drawing.Point(464, 8);
 			groupBox3.Name = "groupBox3";
-			groupBox3.Size = new System.Drawing.Size(310, 503);
+			groupBox3.Size = new System.Drawing.Size(310, 502);
 			groupBox3.TabIndex = 7;
 			groupBox3.TabStop = false;
 			groupBox3.Text = "Window Info";
@@ -527,7 +527,7 @@
 			this.EDT_WINRC_SCALE.MaxLength = 6;
 			this.EDT_WINRC_SCALE.Name = "EDT_WINRC_SCALE";
 			this.EDT_WINRC_SCALE.Size = new System.Drawing.Size(80, 22);
-			this.EDT_WINRC_SCALE.TabIndex = 6;
+			this.EDT_WINRC_SCALE.TabIndex = 4;
 			this.EDT_WINRC_SCALE.Text = "1";
 			this.EDT_WINRC_SCALE.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.EDT_WINRC_SCALE.TextChanged += new System.EventHandler(this.EDT_WINRC_TextChanged);
@@ -546,7 +546,7 @@
 			this._setWindowPositionAndSizeButton.Location = new System.Drawing.Point(361, 57);
 			this._setWindowPositionAndSizeButton.Name = "_setWindowPositionAndSizeButton";
 			this._setWindowPositionAndSizeButton.Size = new System.Drawing.Size(43, 23);
-			this._setWindowPositionAndSizeButton.TabIndex = 4;
+			this._setWindowPositionAndSizeButton.TabIndex = 5;
 			this._setWindowPositionAndSizeButton.Text = "Set";
 			this._setWindowPositionAndSizeButton.UseVisualStyleBackColor = true;
 			this._setWindowPositionAndSizeButton.Click += new System.EventHandler(this._setWindowPositionAndSizeButton_Click);
@@ -659,7 +659,7 @@
 			groupBox4.Location = new System.Drawing.Point(6, 116);
 			groupBox4.Name = "groupBox4";
 			groupBox4.Size = new System.Drawing.Size(429, 91);
-			groupBox4.TabIndex = 0;
+			groupBox4.TabIndex = 1;
 			groupBox4.TabStop = false;
 			groupBox4.Text = "Window scaling from megapixels";
 			// 
@@ -684,16 +684,16 @@
 			// 
 			this.EDT_WINRC_ASPRAT.FormattingEnabled = true;
 			this.EDT_WINRC_ASPRAT.Items.AddRange(new object[] {
-			"1:1",
-			"16:10",
-			"16:9",
-			"21:9",
-			"4:5"});
+            "1:1",
+            "16:10",
+            "16:9",
+            "21:9",
+            "4:5"});
 			this.EDT_WINRC_ASPRAT.Location = new System.Drawing.Point(77, 27);
 			this.EDT_WINRC_ASPRAT.Name = "EDT_WINRC_ASPRAT";
 			this.EDT_WINRC_ASPRAT.Size = new System.Drawing.Size(80, 22);
 			this.EDT_WINRC_ASPRAT.Sorted = true;
-			this.EDT_WINRC_ASPRAT.TabIndex = 8;
+			this.EDT_WINRC_ASPRAT.TabIndex = 0;
 			this.EDT_WINRC_ASPRAT.Text = "1:1";
 			// 
 			// _setWindowResolutionFromMegapixels
@@ -701,7 +701,7 @@
 			this._setWindowResolutionFromMegapixels.Location = new System.Drawing.Point(361, 57);
 			this._setWindowResolutionFromMegapixels.Name = "_setWindowResolutionFromMegapixels";
 			this._setWindowResolutionFromMegapixels.Size = new System.Drawing.Size(43, 23);
-			this._setWindowResolutionFromMegapixels.TabIndex = 4;
+			this._setWindowResolutionFromMegapixels.TabIndex = 2;
 			this._setWindowResolutionFromMegapixels.Text = "Set";
 			this._setWindowResolutionFromMegapixels.UseVisualStyleBackColor = true;
 			this._setWindowResolutionFromMegapixels.Click += new System.EventHandler(this._setWindowResolutionFromMegapixels_Click);
@@ -712,7 +712,7 @@
 			this.EDT_WINRC_MPX.MaxLength = 6;
 			this.EDT_WINRC_MPX.Name = "EDT_WINRC_MPX";
 			this.EDT_WINRC_MPX.Size = new System.Drawing.Size(80, 22);
-			this.EDT_WINRC_MPX.TabIndex = 3;
+			this.EDT_WINRC_MPX.TabIndex = 1;
 			this.EDT_WINRC_MPX.Text = "3";
 			this.EDT_WINRC_MPX.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
 			this.EDT_WINRC_MPX.TextChanged += new System.EventHandler(this.EDT_WINRC_TextChanged);
@@ -908,7 +908,7 @@
 			this.TABPG_STYLES.Location = new System.Drawing.Point(4, 22);
 			this.TABPG_STYLES.Name = "TABPG_STYLES";
 			this.TABPG_STYLES.Padding = new System.Windows.Forms.Padding(3);
-			this.TABPG_STYLES.Size = new System.Drawing.Size(610, 382);
+			this.TABPG_STYLES.Size = new System.Drawing.Size(780, 519);
 			this.TABPG_STYLES.TabIndex = 2;
 			this.TABPG_STYLES.Text = "Window Styles";
 			this.TABPG_STYLES.UseVisualStyleBackColor = true;

@@ -331,8 +331,14 @@ namespace SRWE
 
 		public static float SAFE_String_2_Float(string value)
         {
+			if(string.IsNullOrEmpty(value))
+			{
+				return 0.0f;
+			}
+
 			float result;
-			if (float.TryParse(value, out result))
+			var cultureInfoToUse = value.Contains(",") ? CultureInfo.CurrentCulture : CultureInfo.InvariantCulture;
+			if (float.TryParse(value, NumberStyles.Any, cultureInfoToUse, out result))
 				return result;
 			return 1f;
         }
@@ -341,7 +347,7 @@ namespace SRWE
 		{
 			int nResult;
 
-			if (int.TryParse(hexString, NumberStyles.AllowHexSpecifier, CultureInfo.CurrentCulture, out nResult))
+			if (int.TryParse(hexString, NumberStyles.Any, CultureInfo.CurrentCulture, out nResult))
 				return nResult;
 			return nDefValue;
 		}
