@@ -556,6 +556,11 @@ namespace SRWE
 				EDT_WINRC_Y.Enabled = canEdit;
 				EDT_WINRC_WIDTH.Enabled = canEdit;
 				EDT_WINRC_HEIGHT.Enabled = canEdit;
+				EDT_WINRC_SCALE.Enabled = canEdit;
+				_setWindowPositionAndSizeButton.Enabled = canEdit;
+				_setWindowResolutionFromMegapixels.Enabled = canEdit;
+				EDT_WINRC_MPX.Enabled = canEdit;
+				EDT_WINRC_ASPRAT.Enabled = canEdit;
 
 				BTN_ALIGN_LEFT.Enabled = canEdit;
 				BTN_ALIGN_HCENTER.Enabled = canEdit;
@@ -568,6 +573,7 @@ namespace SRWE
 
 				BTN_FAKE_FULLSCREEN.Enabled = (canEdit && (TV_WINDOW_TREE.SelectedNode.Tag as Window).Parent == null);
 				BTN_TASKBAR_MODE.Enabled = BTN_FAKE_FULLSCREEN.Enabled;
+				UpdateOutputResolution();
 			}
 			else if (TABCTRL_MAIN.SelectedTab == TABPG_STYLES)
 			{
@@ -597,9 +603,45 @@ namespace SRWE
 
 			win.PosX = SRWE_Utility.SAFE_String_2_Int(EDT_WINRC_X.Text, win.PosX);
 			win.PosY = SRWE_Utility.SAFE_String_2_Int(EDT_WINRC_Y.Text, win.PosY);
-			win.Width = SRWE_Utility.SAFE_String_2_Int(EDT_WINRC_WIDTH.Text, win.Width);
-			win.Height = SRWE_Utility.SAFE_String_2_Int(EDT_WINRC_HEIGHT.Text, win.Height);
+			win.Scale = SRWE_Utility.SAFE_String_2_Float(EDT_WINRC_SCALE.Text);
+			win.Width = (int)(SRWE_Utility.SAFE_String_2_Int(EDT_WINRC_WIDTH.Text, win.Width)*win.Scale);
+			win.Height = (int)(SRWE_Utility.SAFE_String_2_Int(EDT_WINRC_HEIGHT.Text, win.Height)*win.Scale);
 			win.ApplyChanges();
+			EDT_WINRC_SCALE.Text = "1";
+
+		}
+
+		private int[] CalculateResolution()
+        {
+			// Width and Height
+			int[] resolution = { 0, 0 };
+			float ratio = SRWE_Utility.SAFE_ParseRatio(EDT_WINRC_ASPRAT.Text);
+			float mpx = SRWE_Utility.SAFE_String_2_Float(EDT_WINRC_MPX.Text)*1e6f;
+			resolution[1] = (int)Math.Sqrt(mpx / ratio);
+			resolution[0] = (int)(resolution[1] * ratio);
+
+			return resolution;
+        }
+
+		private void UpdateOutputResolution()
+        {
+			var resolution = CalculateResolution();
+			EDT_OUTPUT_RESOLUTION.Text = String.Format("{0}x{1}", resolution[0], resolution[1]);
+        }
+
+		private void UpdateWindowFromMegapixels()
+		{
+			m_states = (m_states | States.UpdateWindowRect) ^ States.UpdateWindowRect;
+			if (TV_WINDOW_TREE.SelectedNode == null) return;
+
+			Window win = (Window)TV_WINDOW_TREE.SelectedNode.Tag;
+
+			var resolution = CalculateResolution();
+			win.Width = resolution[0];
+			win.Height = resolution[1];
+
+			win.ApplyChanges();
+
 		}
 
 		private void UpdateWindowStyles(bool exStyles)
@@ -920,5 +962,11 @@ namespace SRWE
 		{
 			UpdateWindowRect();
 		}
-	}
+
+		private void _setWindowResolutionFromMegapixels_Click(object sender, EventArgs e)
+		{
+			UpdateWindowFromMegapixels();
+		}
+
+    }
 }
