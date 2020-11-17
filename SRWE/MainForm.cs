@@ -32,6 +32,7 @@ namespace SRWE
 		private States m_states;
 		private DataTable m_dtWS;
 		private DataTable m_dtWS_EX;
+		private bool _windowSizeSpecificationManuallyChanged = false;
 
 		public MainForm()
 		{
@@ -217,12 +218,14 @@ namespace SRWE
 
 		private void TV_WINDOW_TREE_AfterSelect(object sender, TreeViewEventArgs e)
 		{
+			_windowSizeSpecificationManuallyChanged = false;
 			UpdateGUI(false);
 			RefreshData(false);
 		}
 
 		private void TV_WINDOW_TREE_AfterCheck(object sender, TreeViewEventArgs e)
 		{
+			_windowSizeSpecificationManuallyChanged = false;
 			UpdateGUI(false);
 		}
 
@@ -238,6 +241,7 @@ namespace SRWE
 			if ((m_states & States.IgnoreChangedEvents) != 0) return;
 
 			m_states |= States.UpdateWindowRect;
+			_windowSizeSpecificationManuallyChanged = true;
 		}
 
 		private void BTN_ALIGN_LEFT_Click(object sender, EventArgs e)
@@ -608,6 +612,7 @@ namespace SRWE
 			win.Height = (int)(SRWE_Utility.SAFE_String_2_Int(EDT_WINRC_HEIGHT.Text, win.Height)*win.Scale);
 			win.ApplyChanges();
 			EDT_WINRC_SCALE.Text = "1";
+			_windowSizeSpecificationManuallyChanged = false;
 
 		}
 
@@ -697,8 +702,8 @@ namespace SRWE
 		{
 			if (!EDT_WINRC_X.Focused) EDT_WINRC_X.Text = win.PosX.ToString();
 			if (!EDT_WINRC_Y.Focused) EDT_WINRC_Y.Text = win.PosY.ToString();
-			if (!EDT_WINRC_WIDTH.Focused) EDT_WINRC_WIDTH.Text = win.Width.ToString();
-			if (!EDT_WINRC_HEIGHT.Focused) EDT_WINRC_HEIGHT.Text = win.Height.ToString();
+			if (!EDT_WINRC_WIDTH.Focused && !_windowSizeSpecificationManuallyChanged) EDT_WINRC_WIDTH.Text = win.Width.ToString();
+			if (!EDT_WINRC_HEIGHT.Focused && !_windowSizeSpecificationManuallyChanged) EDT_WINRC_HEIGHT.Text = win.Height.ToString();
 
 			EDT_HANDLE.Text = win.Handle.ToString("X8");
 			EDT_CLASS.Text = win.Class;

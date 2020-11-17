@@ -336,9 +336,8 @@ namespace SRWE
 				return 0.0f;
 			}
 
-			float result;
-			var cultureInfoToUse = value.Contains(",") ? CultureInfo.CurrentCulture : CultureInfo.InvariantCulture;
-			if (float.TryParse(value, NumberStyles.Any, cultureInfoToUse, out result))
+			var cultureInfoToUse = value.Contains(".") ? CultureInfo.InvariantCulture : CultureInfo.CurrentCulture;
+			if (float.TryParse(value, NumberStyles.Any, cultureInfoToUse, out var result))
 				return result;
 			return 1f;
         }

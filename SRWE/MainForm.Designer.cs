@@ -163,7 +163,7 @@
 			groupBox2.Location = new System.Drawing.Point(6, 232);
 			groupBox2.Name = "groupBox2";
 			groupBox2.Size = new System.Drawing.Size(282, 87);
-			groupBox2.TabIndex = 1;
+			groupBox2.TabIndex = 2;
 			groupBox2.TabStop = false;
 			groupBox2.Text = "Align Window";
 			// 
@@ -257,7 +257,7 @@
 			groupBox3.Location = new System.Drawing.Point(464, 8);
 			groupBox3.Name = "groupBox3";
 			groupBox3.Size = new System.Drawing.Size(310, 502);
-			groupBox3.TabIndex = 7;
+			groupBox3.TabIndex = 8;
 			groupBox3.TabStop = false;
 			groupBox3.Text = "Window Info";
 			// 
@@ -844,7 +844,7 @@
 			this._autoAttachToLastKnownCheckBox.Location = new System.Drawing.Point(21, 372);
 			this._autoAttachToLastKnownCheckBox.Name = "_autoAttachToLastKnownCheckBox";
 			this._autoAttachToLastKnownCheckBox.Size = new System.Drawing.Size(216, 18);
-			this._autoAttachToLastKnownCheckBox.TabIndex = 3;
+			this._autoAttachToLastKnownCheckBox.TabIndex = 4;
 			this._autoAttachToLastKnownCheckBox.Text = "Auto-attach to last known process";
 			this.toolTip1.SetToolTip(this._autoAttachToLastKnownCheckBox, "Check this checkbox if you want SRWE to attach automatically at startup to the la" +
         "st process known");
@@ -857,7 +857,7 @@
 			this._forceExitSizeMoveCheckBox.Location = new System.Drawing.Point(21, 348);
 			this._forceExitSizeMoveCheckBox.Name = "_forceExitSizeMoveCheckBox";
 			this._forceExitSizeMoveCheckBox.Size = new System.Drawing.Size(255, 18);
-			this._forceExitSizeMoveCheckBox.TabIndex = 2;
+			this._forceExitSizeMoveCheckBox.TabIndex = 3;
 			this._forceExitSizeMoveCheckBox.Text = "Force EXITSIZEMOVE after window resize";
 			this.toolTip1.SetToolTip(this._forceExitSizeMoveCheckBox, "Check this checkbox if, after window resizing, the game stretches the viewport in" +
         "stead of resizing it (so it\'s pixelated). Sometimes required for Frostbyte games" +
@@ -870,7 +870,7 @@
 			this.BTN_TASKBAR_MODE.Location = new System.Drawing.Point(67, 470);
 			this.BTN_TASKBAR_MODE.Name = "BTN_TASKBAR_MODE";
 			this.BTN_TASKBAR_MODE.Size = new System.Drawing.Size(160, 25);
-			this.BTN_TASKBAR_MODE.TabIndex = 6;
+			this.BTN_TASKBAR_MODE.TabIndex = 7;
 			this.BTN_TASKBAR_MODE.Text = "&Taskbar mode";
 			this.BTN_TASKBAR_MODE.UseVisualStyleBackColor = true;
 			this.BTN_TASKBAR_MODE.Click += new System.EventHandler(this.BTN_TASKBAR_MODE_Click);
@@ -880,7 +880,7 @@
 			this.BTN_FAKE_FULLSCREEN.Location = new System.Drawing.Point(67, 439);
 			this.BTN_FAKE_FULLSCREEN.Name = "BTN_FAKE_FULLSCREEN";
 			this.BTN_FAKE_FULLSCREEN.Size = new System.Drawing.Size(160, 25);
-			this.BTN_FAKE_FULLSCREEN.TabIndex = 5;
+			this.BTN_FAKE_FULLSCREEN.TabIndex = 6;
 			this.BTN_FAKE_FULLSCREEN.Text = "&Fake fullscreen";
 			this.BTN_FAKE_FULLSCREEN.UseVisualStyleBackColor = true;
 			this.BTN_FAKE_FULLSCREEN.Click += new System.EventHandler(this.BTN_FAKE_FULLSCREEN_Click);
@@ -890,7 +890,7 @@
 			this.BTN_REM_BORDERS.Location = new System.Drawing.Point(67, 408);
 			this.BTN_REM_BORDERS.Name = "BTN_REM_BORDERS";
 			this.BTN_REM_BORDERS.Size = new System.Drawing.Size(160, 25);
-			this.BTN_REM_BORDERS.TabIndex = 4;
+			this.BTN_REM_BORDERS.TabIndex = 5;
 			this.BTN_REM_BORDERS.Text = "Remove &borders";
 			this.BTN_REM_BORDERS.UseVisualStyleBackColor = true;
 			this.BTN_REM_BORDERS.Click += new System.EventHandler(this.BTN_REM_BORDERS_Click);
