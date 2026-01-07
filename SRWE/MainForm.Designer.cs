@@ -256,7 +256,7 @@
 			groupBox3.Controls.Add(this.EDT_HANDLE);
 			groupBox3.Location = new System.Drawing.Point(464, 8);
 			groupBox3.Name = "groupBox3";
-			groupBox3.Size = new System.Drawing.Size(310, 502);
+			groupBox3.Size = new System.Drawing.Size(310, 501);
 			groupBox3.TabIndex = 8;
 			groupBox3.TabStop = false;
 			groupBox3.Text = "Window Info";
@@ -905,10 +905,10 @@
 			this.TABPG_STYLES.Controls.Add(this.DGV_WS);
 			this.TABPG_STYLES.Controls.Add(label13);
 			this.TABPG_STYLES.Controls.Add(label12);
-			this.TABPG_STYLES.Location = new System.Drawing.Point(4, 22);
+			this.TABPG_STYLES.Location = new System.Drawing.Point(4, 23);
 			this.TABPG_STYLES.Name = "TABPG_STYLES";
 			this.TABPG_STYLES.Padding = new System.Windows.Forms.Padding(3);
-			this.TABPG_STYLES.Size = new System.Drawing.Size(780, 519);
+			this.TABPG_STYLES.Size = new System.Drawing.Size(780, 518);
 			this.TABPG_STYLES.TabIndex = 2;
 			this.TABPG_STYLES.Text = "Window Styles";
 			this.TABPG_STYLES.UseVisualStyleBackColor = true;
@@ -1090,7 +1090,8 @@
 			// 
 			// MainForm
 			// 
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+			this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
 			this.ClientSize = new System.Drawing.Size(1082, 604);
 			this.Controls.Add(this._aboutLinkLabel);
 			this.Controls.Add(this.TABCTRL_MAIN);
