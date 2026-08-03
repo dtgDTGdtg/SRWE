@@ -6,6 +6,7 @@ using System.Xml;
 using System.Xml.XPath;
 using System.Globalization;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 
 
 namespace SRWE
@@ -323,8 +324,8 @@ namespace SRWE
 		public static int SAFE_String_2_Int(string value, int nDefValue)
 		{
 			int nResult;
-
-			if (int.TryParse(value, out nResult))
+			string sanitizedValue = Regex.Replace(value, "[.,_ ]", "");
+			if (int.TryParse(sanitizedValue, out nResult))
 				return nResult;
 			return nDefValue;
 		}
